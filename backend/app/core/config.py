@@ -6,6 +6,7 @@ class Settings(BaseSettings):
         env_file_encoding="utf-8",
     )
 
+    APP_NAME: str
     DATABASE_URL: str
     # OPENAI_API_KEY: str
     PUBLIC_KEY: str
@@ -13,5 +14,6 @@ class Settings(BaseSettings):
     PORT: int
     GOOGLE_CLIENT_ID: str
     GOOGLE_CLIENT_SECRET: str
+    SECRET_KEY: str
 
 settings = Settings()
