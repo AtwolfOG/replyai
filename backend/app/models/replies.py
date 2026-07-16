@@ -15,20 +15,27 @@ if TYPE_CHECKING:
     from app.models.users import User
 
 class Tone(str, Enum):
-    PROFESSIONAL = "professional"
+    """Tone for the reply"""
     CASUAL = "casual"
-    FRIENDLY = "friendly"
-    FORMAL = "formal"
-    INFORMAL = "informal"
+    FREINDLY = "freindly"
+    PROFESSIONAL = "professional"
+    EDUCATIONAL = "educational"
+    HUMOROUS = "humorous"
+    PERSUASIVE = "persuasive"
+    
 
 class Audience(str, Enum):
+    """Audience for the reply"""
     GENERAL = "general"
-    BUSINESS = "business"
-    FRIENDLY = "friendly"
-    FORMAL = "formal"
-    INFORMAL = "informal"
+    STUDENT = "student"
+    DEVELOPER = "developer"
+    PROFESSIONAL = "professional"
+    ACADEMIC = "academic"
+    SOCIAL_MEDIA = "social media"
+    
 
 class Length(str, Enum):
+    """Length of the reply"""
     SHORT = "short"
     MEDIUM = "medium"
     LONG = "long"
@@ -38,7 +45,7 @@ class Reply(Base):
 
     id: Mapped[UUID] = mapped_column(SQLUUID(as_uuid=True), primary_key=True, default=uuid4)
     user_id: Mapped[UUID] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"))
-    transcipt: Mapped[str] = mapped_column(String(5000))
+    transcript: Mapped[str] = mapped_column(String(5000))
     tone: Mapped[Tone]
     audience: Mapped[Audience]
     generated_reply: Mapped[str]

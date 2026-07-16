@@ -34,7 +34,7 @@ def generate_rand_string(length: int=64):
     chars = string.ascii_letters + string.digits + string.punctuation
     return ''.join(secrets.choice(chars) for _ in range(length))
 
-def authenticate_and_inject_user_id(request: Request, Authorization: Annotated[str, Header()]):
+def authenticate_and_inject_user_id(request: Request, Authorization: Annotated[str, Header()]) -> str:
     try:
         access_token = Authorization
         if access_token:
@@ -47,5 +47,6 @@ def authenticate_and_inject_user_id(request: Request, Authorization: Annotated[s
         if not user_id:
             raise HTTPException(status_code=401, detail="Unauthorized")
         request.session["user_id"] = user_id
+        return user_id
     except Exception:
         raise HTTPException(status_code=401, detail="Unauthorized")

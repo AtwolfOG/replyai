@@ -13,18 +13,25 @@ if TYPE_CHECKING:
     from app.models.users import User
 
 class SettingsTone(str, Enum):
+    """ Default tone for the reply"""
     CASUAL = "casual"
-    FORMAL = "formal"
-    INFORMAL = "informal"
+    FREINDLY = "freindly"
+    PROFESSIONAL = "professional"
+    EDUCATIONAL = "educational"
+    HUMOROUS = "humorous"
+    PERSUASIVE = "persuasive" 
 
 class SettingsAudience(str, Enum):
+    """ Default audience for the reply"""
     GENERAL = "general"
+    STUDENT = "student"
+    DEVELOPER = "developer"
     PROFESSIONAL = "professional"
-    FRIENDLY = "friendly"
-    FORMAL = "formal"
-    INFORMAL = "informal"
+    ACADEMIC = "academic"
+    SOCIAL_MEDIA = "social media"
 
 class SettingsLength(str, Enum):
+    """ Default length for the reply"""
     SHORT = "short"
     MEDIUM = "medium"
     LONG = "long"
