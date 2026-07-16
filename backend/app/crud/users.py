@@ -7,7 +7,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.models.users import User
 from app.schemas.user import UserBase
 
-async def create_user(
+async def db_create_user(
     db: AsyncSession,
     user: UserBase,
 ) -> UUID:
@@ -28,7 +28,7 @@ async def create_user(
     return existing_user_id
 
 
-async def get_user(
+async def db_get_user(
     db: AsyncSession,
     user_id: int,
 ) -> User:

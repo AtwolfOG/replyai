@@ -1,12 +1,10 @@
 
-from app.schemas.user import UserSettingsBase
-from app.crud.user_settings import update_user_settings
+from app.schemas.user import UserSettingsBase, UserResponse
+from app.crud.user_settings import db_update_user_settings, db_get_user_settings
 from app.schemas.user import UserSettingsResponse
 from app.db.session import get_db
 from sqlalchemy.ext.asyncio import AsyncSession
-from app.crud.user_settings import get_user_settings
-from app.schemas.user import UserResponse
-from app.crud.users import get_user
+from app.crud.users import db_get_user
 from uuid import UUID
 from fastapi import Depends
 from fastapi import HTTPException
@@ -26,7 +24,7 @@ async def get_user_data(request: Request, db: AsyncSession = Depends(get_db)) ->
       if not user_id:
           raise HTTPException(status_code=401, detail="Unauthorized")
       user_id_UUID = UUID(user_id)
-      user = await get_user(db, user_id_UUID)
+      user = await db_get_user(db, user_id_UUID)
       return UserResponse(**user.__dict__)
     except Exception:
       raise HTTPException(status_code=400, detail="Failed to get user data")
@@ -41,7 +39,7 @@ async def get_settings(request: Request, db: AsyncSession = Depends(get_db)) -> 
       if not user_id:
           raise HTTPException(status_code=401, detail="Unauthorized")
       user_id_UUID = UUID(user_id)
-      user_settings = await get_user_settings(db, user_id_UUID)
+      user_settings = await db_get_user_settings(db, user_id_UUID)
       return UserSettingsResponse(**user_settings.__dict__)
     except Exception:
       raise HTTPException(status_code=400, detail="Failed to get user data")
@@ -56,7 +54,7 @@ async def update_settings(request: Request, new_settings: UserSettingsBase, db: 
       if not user_id:
           raise HTTPException(status_code=401, detail="Unauthorized")
       user_id_UUID = UUID(user_id)
-      user_settings = await update_user_settings(db, user_id_UUID, new_settings)
+      user_settings = await db_update_user_settings(db, user_id_UUID, new_settings)
       return UserSettingsResponse(**user_settings.__dict__)
     except Exception:
       raise HTTPException(status_code=400, detail="Failed to update settings")

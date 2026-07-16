@@ -1,8 +1,6 @@
-from app.crud.refresh_tokens import revoke_refresh_token
-from app.crud.refresh_tokens import get_refresh_token
 from app.schemas.auth import LogoutResponse
 from datetime import timedelta
-from app.crud.refresh_tokens import create_refresh_token
+from app.crud.refresh_tokens import db_create_refresh_token, db_revoke_refresh_token
 from app.core.security import generate_rand_string
 from app.schemas.auth import SigninResponse
 from app.crud.users import create_user
@@ -10,7 +8,7 @@ from app.schemas.user import UserBase
 from app.db.session import get_db
 from fastapi import Depends
 from sqlalchemy.orm import Session
-from fastapi.responses import RedirectResponse, Response
+from fastapi.responses import Response
 from fastapi import HTTPException
 from authlib.integrations.base_client import OAuthError
 from fastapi import Request
@@ -76,7 +74,7 @@ async def auth_callback(request: Request, response: Response, db: Session = Depe
 
     refresh_token = generate_rand_string()
 
-    await create_refresh_token(db, user_id, refresh_token)
+    await db_create_refresh_token(db, user_id, refresh_token)
 
     response.set_cookie(
       key="refresh_token",
@@ -109,12 +107,12 @@ async def refresh(response: Response, request: Request, db: Session = Depends(ge
   if not refresh_token:
     raise HTTPException(status_code=401, detail="Unauthorized")
     
-  revoked_refresh_token = revoke_refresh_token(db, refresh_token)
+  revoked_refresh_token = db_revoke_refresh_token(db, refresh_token)
   if not revoked_refresh_token:
     raise HTTPException(status_code=401, detail="Unauthorized")
   
   new_refresh_token = generate_rand_string()
-  await create_refresh_token(db, revoked_refresh_token.user_id, new_refresh_token)
+  await db_create_refresh_token(db, revoked_refresh_token.user_id, new_refresh_token)
   
 
   access_token = jwt_encode(data={"id": str(revoked_refresh_token.user_id)})

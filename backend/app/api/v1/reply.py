@@ -1,8 +1,5 @@
-from app.crud.replies import db_delete_reply
 from uuid import UUID
-from app.crud.replies import db_generate_reply
-from app.crud.replies import db_get_reply
-from app.crud.replies import db_get_replies
+from app.crud.replies import db_get_reply, db_generate_reply, db_get_replies, db_delete_reply
 from fastapi import Path
 from typing import Annotated
 from app.schemas.reply import GetReplyResponse

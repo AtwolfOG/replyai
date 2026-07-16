@@ -4,7 +4,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from uuid import UUID
 from app.schemas.user import UserSettingsBase
 
-async def get_user_settings(db: AsyncSession, user_id: UUID):
+async def db_get_user_settings(db: AsyncSession, user_id: UUID):
     """
     Get user settings.
     """
@@ -12,7 +12,7 @@ async def get_user_settings(db: AsyncSession, user_id: UUID):
     result = (await db.execute(stmt)).scalar_one()
     return result
 
-async def update_user_settings(db: AsyncSession, user_id: UUID, settings: UserSettingsBase) -> UserSettings:
+async def db_update_user_settings(db: AsyncSession, user_id: UUID, settings: UserSettingsBase) -> UserSettings:
     """
     Update user settings.
     """
