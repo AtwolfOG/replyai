@@ -1,3 +1,5 @@
+from app.schemas.exceptions import APIException, APIExceptionResponse
+from sqlalchemy.exc import NoResultFound
 from uuid import UUID
 from app.crud.replies import db_get_reply, db_generate_reply, db_get_replies, db_delete_reply
 from fastapi import Path
@@ -16,7 +18,7 @@ from fastapi import APIRouter
 
 reply_router = APIRouter(prefix="/replies", tags=["replies"], dependencies=[Depends(authenticate_and_inject_user_id)])
 
-@reply_router.post("/generate", status_code=200)
+@reply_router.post("/generate", status_code=201, response_model=GenerateReplyResponse, responses={401: {"model": APIExceptionResponse}, 500: {"model": APIExceptionResponse}})
 async def generate_reply(request: Request, data: GenerateReplyRequest, db: AsyncSession = Depends(get_db)) -> GenerateReplyResponse:
     """
     Generate a reply.
@@ -49,13 +51,13 @@ async def generate_reply(request: Request, data: GenerateReplyRequest, db: Async
         )
         generated_reply = response.choices[0].message.content
         if not generated_reply:
-            raise HTTPException(status_code=500, detail="Failed to generate reply")
+            raise APIException(status_code=500, message="Failed to generate reply")
         reply_id = await db_generate_reply(db, user_id, data, generated_reply)
         return GenerateReplyResponse(generated_reply=generated_reply, id=reply_id)
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        raise APIException(status_code=500, message=str(e))
 
-@reply_router.get("/")
+@reply_router.get("/", responses={401: {"model": APIExceptionResponse}, 500: {"model": APIExceptionResponse}})
 async def get_replies(request: Request, db: AsyncSession = Depends(get_db)) -> list[GetReplyResponse]:
     """
     Get replies.
@@ -63,28 +65,29 @@ async def get_replies(request: Request, db: AsyncSession = Depends(get_db)) -> l
     try:
         user_id = request.session.get("user_id")
         if not user_id:
-            raise HTTPException(status_code=401, detail="Unauthorized")
+            raise APIException(status_code=401, message="Unauthorized")
         replies = await db_get_replies(db, user_id)
         return [GetReplyResponse(**reply.__dict__) for reply in replies]
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        raise APIException(status_code=500, message=str(e))
 
-@reply_router.get("/{id}")
+@reply_router.get("/{id}", response_model=GetReplyResponse, responses={404: {"model": APIExceptionResponse}, 500: {"model": APIExceptionResponse}})
 async def get_reply(request: Request, id: Annotated[UUID, Path(title="Reply ID")], db: AsyncSession = Depends(get_db)) -> GetReplyResponse:
     """
     Get a reply.
     """
 
-    print("id", id)
     try:
         user_id = request.session.get("user_id")
         if not user_id:
-            raise HTTPException(status_code=401, detail="Unauthorized")
+            raise APIException(status_code=401, message="Unauthorized")
         reply = await db_get_reply(db, user_id, id)
         return GetReplyResponse(**reply.__dict__)
+    except NoResultFound as e:
+        raise APIException(status_code=404, message="Reply not found")
     except Exception as e:
 		# change error detail
-        raise HTTPException(status_code=500, detail=str(e))
+        raise APIException(status_code=500, message=str(e))
 
 @reply_router.delete("/{id}")
 async def delete_reply(request: Request, id: Annotated[UUID, Path(title="Reply ID")], db: AsyncSession = Depends(get_db)) -> None:
@@ -94,8 +97,8 @@ async def delete_reply(request: Request, id: Annotated[UUID, Path(title="Reply I
     try:
         user_id = request.session.get("user_id")
         if not user_id:
-            raise HTTPException(status_code=401, detail="Unauthorized")
+            raise APIException(status_code=401, message="Unauthorized")
         await db_delete_reply(db, user_id, id)
         return None
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        raise APIException(status_code=500, message=str(e))
