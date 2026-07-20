@@ -1,8 +1,8 @@
 export function Hero() {
     return (
-        <section className="flex items-center justify-center h-[80vh] bg-(--surface-muted)">
-            <div className="container flex justify-between items-center">
-                <div className="flex flex-col gap-4 lg:max-w-[45%]">
+        <section className="flex items-center justify-center min-h-[80vh] bg-(--surface-muted)">
+            <div className="container flex justify-between items-center max-md:flex-col max-md:gap-12">
+                <div className="flex flex-col gap-4 px-6 py-12 min-h-[50vh] justify-center lg:max-w-[45%] max-md:text-center max-md:justify-center max-md:items-center max-md:max-w-[550px] max-md:w-[40ch] text-pretty">
                   <div>
                     <h1>Speak naturally.</h1>
                     <h1 className="text-(--primary)!">Reply Intelligently.</h1>
@@ -25,7 +25,7 @@ export function Hero() {
 
                       <div className="flex my-4 items-center">
                         <div className="line"></div>
-                        <small className="w-[70%] text-center">AI ANALYSIS</small>
+                        <small className="w-[70%] min-w-fit text-center">AI ANALYSIS</small>
                         <div className="line"></div>
                       </div>
 

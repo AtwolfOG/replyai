@@ -1,3 +1,4 @@
+import { Features } from "@/components/features";
 import { Hero } from "@/components/hero";
 import { Nav } from "@/components/homenav";
 
@@ -6,6 +7,7 @@ function Page() {
     <>
     <Nav />
     <Hero />
+    <Features />
     </>
   );
 }
