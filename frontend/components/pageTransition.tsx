@@ -5,7 +5,7 @@ import { useEffect } from "react";
 export default function Transition({children}: {children: React.ReactNode}) {
   const controls = useAnimationControls();
 
-  useEffect(() => {
+useEffect(() => {
     async function play() {
         await controls.start({
             scaleY: 1,
@@ -25,8 +25,7 @@ export default function Transition({children}: {children: React.ReactNode}) {
     return (
       <>
       <motion.div
-      variants={variants}
-      initial="initial"
+      initial={{scaleY: 0,}}
       animate={controls}
       transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
       className="absolute top-0 left-0 w-full h-full bg-(--primary) z-50 "
