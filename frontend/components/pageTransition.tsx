@@ -10,13 +10,13 @@ useEffect(() => {
         await controls.start({
             scaleY: 1,
             transformOrigin: "top",
-            transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1]  }
+            transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1], bounce: 0.5  }
         });
 
         await controls.start({
             scaleX: 0,
             transformOrigin: "right",
-            transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1]  }
+            transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1], bounce: 0.5  }
         });
     }
 
@@ -25,7 +25,7 @@ useEffect(() => {
     return (
       <>
       <motion.div
-      initial={{scaleY: 0,}}
+      initial={{scaleY: 0}}
       animate={controls}
       transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
       className="absolute top-0 left-0 w-full h-full bg-(--primary) z-50 "
