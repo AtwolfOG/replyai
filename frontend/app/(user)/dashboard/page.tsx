@@ -45,7 +45,7 @@ export default function Dashboard() {
               </div>
               <div>
                 {/* settings */}
-                <div className="flex  gap-(--space-2)">
+                <div className="flex flex-wrap gap-(--space-2)">
                   <div>
                     <p>Tone</p>
                     <div className="flex items-center gap-(--space-2)">
@@ -103,7 +103,6 @@ export default function Dashboard() {
 
 function VoiceMeter({isRecording}: {isRecording: boolean}) {
   const [volume, setVolume] = useState(getVolume());
-  console.log("volume", volume)
   return (
     <motion.div
       initial={{ scaleY: 0.1 }}
