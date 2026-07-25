@@ -129,6 +129,7 @@ body {
   --muted: #434655;
 
   --error: #ba1a1a;
+  --destructive: var(--error);
 
   /* Typography */
   --font-sans: "Inter", sans-serif;

@@ -19,10 +19,10 @@ const Toaster = ({ ...props }: ToasterProps) => {
           <InfoIcon className="size-4" />
         ),
         warning: (
-          <TriangleAlertIcon className="size-4" />
+          <TriangleAlertIcon className="size-4 text-destructive" />
         ),
         error: (
-          <OctagonXIcon className="size-4" />
+          <OctagonXIcon className="size-4 text-destructive" />
         ),
         loading: (
           <Loader2Icon className="size-4 animate-spin" />
