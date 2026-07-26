@@ -51,7 +51,7 @@ function HowItWorksCard({icon, title, description, index}: {icon: React.ReactNod
             <motion.div variants={iconVariants} initial="initial" animate={isInView ? "animate" : "initial"} transition={{duration: .2}} className={cn("flex items-center justify-center", isEven && "col-2 row-1")}>{icon}</motion.div>
             <motion.div variants={lineVariants} initial="initial" animate={isInView ? "animate" : "initial"} transition={{duration: .2}} className="absolute top-0 left-1/2 -translate-x-1/2 w-0.5 h-full"></motion.div>
             <div className={cn(isEven && "text-right")}>
-                <motion.div animate={isInView ? {backgroundColor: "var(--primary)"} : {}} transition={{duration: .2}} className={cn("size-12 my-4 bg-(--primary)/60 text-(--primary-foreground) rounded-full flex items-center justify-center", isEven && "place-self-end")}>{index}</motion.div>
+                <motion.div animate={isInView ? {backgroundColor: "var(--primary)"} : {}} transition={{duration: .2}} className={cn("size-12 my-4 bg-(--primary)/60 text-primary-foreground rounded-full flex items-center justify-center", isEven && "place-self-end")}>{index}</motion.div>
                 <h4>{title}</h4>
                 <p>{description}</p>
             </div>

@@ -28,7 +28,7 @@ useEffect(() => {
       initial={{scaleY: 0}}
       animate={controls}
       transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-      className="absolute top-0 left-0 w-full h-full bg-(--primary) z-50 "
+      className="absolute top-0 left-0 w-full h-full bg-primary z-50 "
       />
       {children}
       </>

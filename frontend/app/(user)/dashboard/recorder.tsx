@@ -27,7 +27,7 @@ type Action = {type: string, payload: string}
           speechRecognition.onresult = (event) => {
             for (let i = event.resultIndex; i < event.results.length; ++i) {
               if (event.results[i].isFinal) {
-                dispatch({ type: "ADD_TRANSCRIPT", payload: event.results[i][0].transcript });
+                dispatch({ type: "ADD_TRANSCRIPT", payload: " " + event.results[i][0].transcript });
               }
             }
             
@@ -38,6 +38,8 @@ type Action = {type: string, payload: string}
           };
           // handle end
           speechRecognition.onend = () => {
+          setIsRecording(false);
+          setSpeechRecognition(null);
             toast.success("Speech recognition service disconnected.");
           };
         }
@@ -59,7 +61,7 @@ type Action = {type: string, payload: string}
 
               <div className="flex items-center justify-center gap-(--space-1) my-(--space-12)">
 {                ([1,2,3,4,5,6,7,8,9,10].map((_, i) => (
-                  <VoiceMeter key={i} isRecording={false} />
+                  <VoiceMeter key={i} isRecording={isRecording} />
                 )))}
               </div>  
             </div> 
@@ -115,7 +117,7 @@ function VoiceMeter({isRecording}: {isRecording: boolean}) {
         }
         setVolume(newVolume);
       }}
-      className="w-2 h-12 bg-primary origin-bottom"
+      className="w-2 h-12 bg-primary "
       >  
     </motion.div>
   )
@@ -125,7 +127,7 @@ function getVolume() {
   return Math.random();
 }
 
-function startTranscript(setSpeechRecognition: (speechRecognition: SpeechRecognition) => void, dispatch: (action: Action) => void) {
+function startTranscript(setSpeechRecognition: (speechRecognition: SpeechRecognition) => void) {
   try {
     // 1. Initialize API with fallback for Safari
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
