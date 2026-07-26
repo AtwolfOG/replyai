@@ -3,7 +3,7 @@ from app.core.config import settings
 from starlette.middleware.sessions import SessionMiddleware
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
-
+from fastapi.middleware.cors import CORSMiddleware
 from app.api.router import api_router
 
 app = FastAPI(
@@ -11,6 +11,20 @@ app = FastAPI(
 )
 app.include_router(api_router)
 app.add_middleware(SessionMiddleware, secret_key=settings.SECRET_KEY)
+
+origins = [
+  settings.FRONTEND_URL,
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
 
 @app.exception_handler(APIException)
 async def api_exception_handler(request: Request, exc: APIException):

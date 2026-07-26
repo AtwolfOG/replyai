@@ -1,7 +1,13 @@
+"use client"
 import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Switch } from "@/components/ui/switch";
-import { ChevronDown, Settings as SettingsIcon, ShieldCheck, Sparkles } from "lucide-react";
+import { ChevronDown, Settings as SettingsIcon, ShieldCheck } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { getSettings } from "@/lib/api";
+import { Loader } from "@/components/loader";
+import { useEffect } from "react";
+
 type SettingsReducer = {
   tone: string;
   length: string;
@@ -32,8 +38,19 @@ const settings = [
 ]
 
 export function Settings({settingsState, dispatch}: {settingsState: SettingsReducer, dispatch: (action: {type: string, payload: string}) => void}) {
+  const {data, isLoading, isSuccess} = useQuery({
+    queryKey: ["settings"],
+    queryFn: getSettings,
+  })
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch({type: "SET_SETTINGS", payload: data})
+    }
+  }, [isSuccess, data, dispatch])
+
+  if (isLoading) return <Loader />
     return (
-        <div className="p-(--space-4)">
+      <>
             <div className="flex items-center gap-(--space-2) mt-2 mb-4">
                 <SettingsIcon className="text-primary" size={20} />
                 <h4 className="">Reply settings</h4>
@@ -59,10 +76,7 @@ export function Settings({settingsState, dispatch}: {settingsState: SettingsRedu
                     <Switch disabled size="default"/>
                 </div>
               </div>
-              <div>
-                <Button className="w-full cursor-pointer bg-primary text-primary-foreground py-(--space-6)" variant="outline">Generate Reply <Sparkles /></Button>
-              </div>
-        </div>
+    </>
     )
 }
 

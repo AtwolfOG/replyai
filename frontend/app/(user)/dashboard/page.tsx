@@ -5,6 +5,13 @@ import { Settings } from "./settings";
 import { Reply } from "./reply";
 import { recorder as Recorder } from "./recorder";
 import { Transcript } from "./transcript";
+import { Sparkles } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useMutation } from "@tanstack/react-query";
+import { generateReply } from "@/lib/api";
+import { ReplyState } from "./types";
+import { GenerateReplyResponse } from "@/lib/types";
+import { Loader } from "@/components/loader";
 
 const testReply = `Hi Sarah,
 
@@ -17,17 +24,9 @@ Let's find 15 minutes tomorrow to discuss the logistics of this transition.
 Best regards,
 The Strategy Team`;
 
-type ReplyState = {
-  tone: string;
-  length: string;
-  audience: string;
-  language: string;
-  transcript: string;
-  reply: string;
-}
 
 export default function Dashboard() {
-  const [state, dispatch] = useReducer(reducer, {
+  const [state, dispatch] = useReducer<ReplyState>(reducer, {
     tone: "casual",
     length: "short",
     audience: "general",
@@ -36,9 +35,22 @@ export default function Dashboard() {
     reply: "",
   });
 
+  const mutation = useMutation({
+    mutationFn: () => generateReply({
+      tone: state.tone, 
+      length: state.length, 
+      audience: state.audience, 
+      user_message: state.transcript
+    }),
+    onSuccess: (data: GenerateReplyResponse) => {
+      dispatch({type: "SET_REPLY", payload: data.generated_reply})
+    }
+  })
+
     return (
       <Transition>
-        <div>
+        <div >
+          {mutation.isPending && <Loader overlay={true} fullscreen={true} />}
           <div className="grid lg:grid-cols-[1fr_0.5fr] gap-4 p-(--space-6) bg-(--surface-muted)">
             <div className="flex flex-col gap-(--space-12)">
             {/* recording section */}
@@ -50,12 +62,17 @@ export default function Dashboard() {
             <div className="flex flex-col gap-(--space-12)">
             {/* reply settings section */}
             <div className="border rounded-xl px-(--space-4) bg-(--surface)">
-              <Settings settingsState={state} dispatch={dispatch} />
+              <div className="p-(--space-4)">
+                <Settings settingsState={state} dispatch={dispatch} />
+                <div>
+                  <Button className="w-full cursor-pointer bg-primary text-primary-foreground py-(--space-6)" variant="outline" onClick={() => mutation.mutate()}>Generate Reply <Sparkles /></Button>
+                </div>
+              </div>
             </div>
 
             {/* reply section */}
             <div className="border rounded-xl  bg-(--surface)">
-              <Reply reply={testReply} />
+              <Reply reply={state.reply} />
             </div>
             </div>
           </div> 
@@ -66,6 +83,8 @@ export default function Dashboard() {
 
 function reducer(state, action) {
   switch (action.type) {
+    case "SET_SETTINGS":
+      return { ...state, ...action.payload };
     case "SET_TONE":
       return { ...state, tone: action.payload };
     case "SET_LENGTH":

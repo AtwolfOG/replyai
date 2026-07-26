@@ -20,6 +20,7 @@ class Settings(BaseSettings):
     GOOGLE_CLIENT_SECRET: str
     SECRET_KEY: str
     GEMINI_API_KEY: str
+    FRONTEND_URL: str
 
 settings = Settings()
 

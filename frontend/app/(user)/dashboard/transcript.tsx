@@ -11,7 +11,7 @@ export function Transcript({transcript, dispatch}: {transcript: string, dispatch
                     <Button variant="outline" onClick={() => dispatch({ type: "CLEAR_TRANSCRIPT" })}>Clear</Button>
                 </div>
                 <div className="p-(--space-4) rounded-b-xl border">
-                  <textarea name="transcript" id="transcript" onChange={(e) => dispatch({ type: "SET_TRANSCRIPT", payload: e.target.value })} value={transcript} className="resize-none w-full h-70 bg-(--surface-muted) border rounded-xl p-(--space-4)"></textarea>
+                  <textarea name="transcript" id="transcript" onChange={(e) => console.log("sup setting transcript") && dispatch({ type: "SET_TRANSCRIPT", payload: e.target.value })} value={transcript} className="resize-none w-full h-70 bg-(--surface-muted) border rounded-xl p-(--space-4)"></textarea>
                 </div>
             </div>
     )

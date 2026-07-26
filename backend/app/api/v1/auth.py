@@ -40,7 +40,8 @@ async def signin(request: Request):
   Redirects the user to the Google sign-in page.
   """
   try:
-    redirect_uri = request.url_for("auth_callback")
+    # redirect_uri = request.url_for("auth_callback")
+    redirect_uri = f"{settings.FRONTEND_URL}/auth/google/callback"
     return await oauth.google.authorize_redirect(request, str(redirect_uri))
   except Exception:
     raise APIException(status_code=400, message="Authentication failed")
@@ -81,7 +82,7 @@ async def auth_callback(request: Request, response: Response, db: Session = Depe
     response.set_cookie(
       key="refresh_token",
       value=refresh_token,
-      # httponly=True,
+      httponly=True,
       secure=True,
       samesite="strict",
       max_age=timedelta(days=7)
@@ -109,8 +110,9 @@ async def refresh(response: Response, request: Request, db: Session = Depends(ge
     refresh_token = request.cookies.get("refresh_token")
     if not refresh_token:
       raise APIException(status_code=401, message="Unauthorized")
+    print('refresh token:', refresh_token)
       
-    revoked_refresh_token = db_revoke_refresh_token(db, refresh_token)
+    revoked_refresh_token = await db_revoke_refresh_token(db, refresh_token)
     if not revoked_refresh_token:
       raise APIException(status_code=401, message="Unauthorized")
     
@@ -122,7 +124,7 @@ async def refresh(response: Response, request: Request, db: Session = Depends(ge
     response.set_cookie(
       key="refresh_token",
       value=new_refresh_token,
-      # httponly=True,
+      httponly=True,
       secure=True,
       samesite="strict",
       max_age=timedelta(days=7)
