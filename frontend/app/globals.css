@@ -166,7 +166,7 @@ body {
   --muted-foreground: oklch(0.556 0 0);
   --accent: oklch(0.97 0 0);
   --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
+  --destructive: #ba1a1a;
   --input: oklch(0.922 0 0);
   --ring: oklch(0.708 0 0);
   --chart-1: oklch(0.87 0 0);
@@ -355,4 +355,10 @@ blockquote{
   height: 1px;
   background: var(--border);
   width: 100%;
+}
+
+input{
+  border: 1px solid var(--border);
+  padding: var(--space-2);
+  border-radius: var(--radius);
 }

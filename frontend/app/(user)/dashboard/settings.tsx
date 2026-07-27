@@ -14,6 +14,7 @@ type SettingsReducer = {
   audience: string;
   language: string;
 }
+
 const settings = [
   {
     label: "TONE",
