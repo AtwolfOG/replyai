@@ -140,7 +140,7 @@ function HistoryItem({item, index}: {item: Reply, index: number}) {
       <p className="line-clamp-3 flex-1">{item.generated_reply}</p>
       <div className="w-full h-0.5 border mt-(--space-12)"></div>
       <div className="flex items-center gap-(--space-2) justify-self-end mt-(--space-2)">
-        <Button className="flex-1 cursor-pointer bg-primary/90 hover:bg-primary text-primary-foreground py-(--space-6)" variant="outline" onClick={() => {router.push(`/history/${item.id}`)}}>View Reply <SquareArrowOutUpRight size={20} /></Button>
+        <Button className="flex-1 cursor-pointer bg-primary/90 hover:bg-primary duration-300 text-primary-foreground py-(--space-6)" variant="outline" onClick={() => {router.push(`/history/${item.id}`)}}>View Reply <SquareArrowOutUpRight size={20} /></Button>
         <Button className="cursor-pointer" onClick={() => {copyToClipboard(item.generated_reply)}} variant="outline"><Copy size={20} /></Button>
         <Button className="cursor-pointer text-background" variant="destructive"><Trash2 size={20} /></Button>
       </div>

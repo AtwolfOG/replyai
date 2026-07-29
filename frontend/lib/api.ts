@@ -134,7 +134,7 @@ export async function callback(searchParams: URLSearchParams) {
   return response.data;
 }
 
-export async function getReply(id: string): Promise<Reply> {
+export async function getReplyById(id: string): Promise<Reply> {
   const response = await api.get(`/replies/${id}`);
   return response.data;
 }
