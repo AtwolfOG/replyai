@@ -1,5 +1,6 @@
 "use client"
 import { Loader } from "@/components/loader";
+import { RotatingBtn } from "@/components/rotatingbtn";
 import { Button } from "@/components/ui/button";
 import { getReplyById } from "@/lib/api";
 import { useQuery } from "@tanstack/react-query";
@@ -12,19 +13,21 @@ export default function Page() {
     queryKey: ["reply", id],
     queryFn: () => getReplyById(id as string),
   })
+  console.log(data)
     return (
         <div>
-          <div className="p-(--spacing-16)">
+          <div className="px-(--space-4) py-(--space-2)">
             <Button className="flex items-center gap-(--space-2) group text-muted hover:text-primary! transition-all duration-300"> <ArrowLeft className="group-hover:-translate-x-1 transition-all duration-300" /> Back</Button>
           </div>
           {isLoading && <Loader />}
           {isError && <div className="flex items-center justify-center">Error</div>}
 
-          <div className="">
-            <h1>Reply Detail</h1>
-            <p></p>
+          {data && <div className="px-(--space-6) ">
+            <h3>Reply Detail</h3>
+            <small>{new Date(data.created_at).toLocaleString()}</small>
+            <RotatingBtn>sup</RotatingBtn>
             
-          </div>
+          </div>}
         </div>
     )
 }
