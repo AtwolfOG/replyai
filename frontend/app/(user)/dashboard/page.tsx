@@ -1,10 +1,10 @@
 "use client"
 import Transition from "@/components/pageTransition"
 import { useReducer } from "react";
-import { Settings } from "./settings";
-import { Reply } from "./reply";
+import { Settings } from "@/components/settings";
+import { Reply } from "@/components/reply";
 import { recorder as Recorder } from "./recorder";
-import { Transcript } from "./transcript";
+import { Transcript } from "@/components/transcript";
 import { Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useMutation } from "@tanstack/react-query";
@@ -12,18 +12,6 @@ import { generateReply } from "@/lib/api";
 import { ReplyState } from "./types";
 import { GenerateReplyResponse } from "@/lib/types";
 import { Loader } from "@/components/loader";
-
-const testReply = `Hi Sarah,
-
-After reviewing the Q3 performance data, I've concluded that we need to strategically realign our focus toward the enterprise segment. While our traction in the SMB market remains stable, the increasing churn rates suggest that our current high-touch model isn't sustainable for lower LTV accounts.
-
-I’m proposing we implement a tiered account management framework. This will allow us to double down on our highest-value enterprise clients, ensuring they receive the specialized attention required for long-term retention and expansion, while automating more of the SMB journey.
-
-Let's find 15 minutes tomorrow to discuss the logistics of this transition.
-
-Best regards,
-The Strategy Team`;
-
 
 export default function Dashboard() {
   const [state, dispatch] = useReducer<ReplyState>(reducer, {
@@ -63,7 +51,7 @@ export default function Dashboard() {
             {/* reply settings section */}
             <div className="border rounded-xl px-(--space-4) bg-(--surface)">
               <div className="p-(--space-4)">
-                <Settings settingsState={state} dispatch={dispatch} />
+                <Settings settingsState={state} dispatch={dispatch} defaultSetting={true} />
                 <div>
                   <Button className="w-full cursor-pointer bg-primary text-primary-foreground py-(--space-6)" variant="outline" onClick={() => mutation.mutate()}>Generate Reply <Sparkles /></Button>
                 </div>

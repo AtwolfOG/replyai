@@ -84,7 +84,7 @@ export default function History() {
               </div>}
               {data && 
               data.length > 0 ?
-              <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-(--space-4) py-(--space-6)">
+              <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,400px))] gap-(--space-4) py-(--space-6)">
                 {data.map((item, index) => (
                   <HistoryItem key={index} item={item} index={index} />
                 ))}

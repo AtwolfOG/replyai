@@ -38,16 +38,16 @@ const settings = [
   },
 ]
 
-export function Settings({settingsState, dispatch}: {settingsState: SettingsReducer, dispatch: (action: {type: string, payload: string}) => void}) {
+export function Settings({settingsState, dispatch, defaultSetting}: {settingsState: SettingsReducer, dispatch: (action: {type: string, payload: string}) => void, defaultSetting: boolean}) {
   const {data, isLoading, isSuccess} = useQuery({
     queryKey: ["settings"],
     queryFn: getSettings,
   })
   useEffect(() => {
-    if (isSuccess) {
-      dispatch({type: "SET_SETTINGS", payload: data})
+    if (isSuccess && defaultSetting) {
+      dispatch({type: "SET_SETTINGS", payload: {tone: data.default_tone, length: data.default_length, audience: data.default_audience}})
     }
-  }, [isSuccess, data, dispatch])
+  }, [isSuccess, data, dispatch, defaultSetting])
 
   if (isLoading) return <Loader />
     return (

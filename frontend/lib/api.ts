@@ -3,7 +3,7 @@ import axios, {
   AxiosResponse,
   InternalAxiosRequestConfig,
 } from "axios";
-import { Reply } from "./types";
+import { Reply, Settings } from "./types";
 
 
 let access_token: string = "";
@@ -149,7 +149,7 @@ export async function generateReply(data: GenerateReplyRequest): Promise<Generat
   return response.data;
 }
 
-export async function getSettings() {
+export async function getSettings(): Settings {
   const response = await api.get(`/users/settings`);
   return response.data;
 }
