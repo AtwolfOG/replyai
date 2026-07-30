@@ -27,6 +27,8 @@ export default function Page() {
   const {data, isLoading, isError } = useQuery({
     queryKey: ["reply", id],
     queryFn: () => getReplyById(id as string),
+    staleTime: Infinity,
+    gcTime: Infinity,
   })
   useEffect(() => {
     if (data) {
@@ -64,7 +66,7 @@ export default function Page() {
                   </div>
                 </div>
                 <div className="flex flex-col gap-(--space-4) my-(--space-8)">
-                  <Transcript transcript={data.transcript}  />
+                  <Transcript transcript={data.transcript} dispatch={dispatch} />
                   <div className="border rounded-xl bg-(--surface)">
                     <Reply reply={data.generated_reply} />
                   </div>

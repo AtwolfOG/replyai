@@ -51,6 +51,8 @@ export default function History() {
   const {data, isLoading, error, isError, refetch} = useQuery<Reply[]>({
     queryKey: ["history"],
     queryFn: () => getReplies(),
+    staleTime: Infinity,
+    gcTime: Infinity,
   })
     return (
       <Transition>

@@ -42,6 +42,8 @@ export function Settings({settingsState, dispatch, defaultSetting}: {settingsSta
   const {data, isLoading, isSuccess} = useQuery({
     queryKey: ["settings"],
     queryFn: getSettings,
+    staleTime: Infinity,
+    gcTime: Infinity,
   })
   useEffect(() => {
     if (isSuccess && defaultSetting) {
