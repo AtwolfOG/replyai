@@ -57,7 +57,7 @@ export default function History() {
         <div>
           <div className="px-(--space-4) py-(--space-6)">
             <div>
-              <div className="flex flex-wrap items-center justify-between my-(--space-4)">
+              <div className="flex flex-wrap gap-(--space-8) items-center justify-between my-(--space-4)">
                 <div>
                   <h2>Generation History</h2>
                   <p>Manage your email history</p>
@@ -84,7 +84,7 @@ export default function History() {
               </div>}
               {data && 
               data.length > 0 ?
-              <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,400px))] gap-(--space-4) py-(--space-6)">
+              <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,400px))] gap-(--space-4) py-(--space-6) items-center justify-center">
                 {data.map((item, index) => (
                   <HistoryItem key={index} item={item} index={index} />
                 ))}
