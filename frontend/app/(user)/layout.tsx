@@ -1,15 +1,16 @@
-import Navbar from "@/components/navbar";
+import { BottomNavBar, TopNavbar } from "@/components/navbar";
 import Transition from "@/components/pageTransition"
 
 export default function Layout({children}: {children: React.ReactNode}) {
     return (
         <main className="flex flex-col min-h-screen">
-            <Navbar />
+            <TopNavbar />
             <div className="relative flex-1">
-      <Transition>
-                {children}
-      </Transition>
+                <Transition>
+                    {children}
+                </Transition>
             </div>
+            <BottomNavBar />
         </main>
     )
 }
