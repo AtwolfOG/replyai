@@ -37,9 +37,9 @@ export default function Dashboard() {
 
     return (
       <Transition>
-        <div >
+        <div>
           {mutation.isPending && <Loader overlay={true} fullscreen={true} />}
-          <div className="grid lg:grid-cols-[1fr_0.5fr] gap-4 p-(--space-6) bg-(--surface-muted)">
+          <div className="grid lg:grid-cols-[1fr_0.5fr] gap-4 bg-(--surface-muted)">
             <div className="flex flex-col gap-(--space-12)">
             {/* recording section */}
             <Recorder dispatch={dispatch}/>

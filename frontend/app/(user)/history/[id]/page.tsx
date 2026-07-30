@@ -39,13 +39,13 @@ export default function Page() {
   }, [data])
     return (
         <div>
-          <div className="px-(--space-4) py-(--space-2)">
+          <div>
             <Button className="flex items-center gap-(--space-2) group text-muted hover:text-primary! transition-all duration-300"> <ArrowLeft className="group-hover:-translate-x-1 transition-all duration-300" /> Back</Button>
           </div>
           {isLoading && <Loader />}
           {isError && <div className="flex items-center justify-center">Error</div>}
 
-          {data && <div className="px-(--space-6) ">
+          {data && <div>
             <div className="grid lg:grid-cols-[1fr_0.5fr] gap-4 p-(--space-6) bg-(--surface-muted)">
               <div>
                 <div className="flex items-center justify-between flex-wrap gap-(--space-8)">

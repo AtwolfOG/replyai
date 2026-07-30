@@ -57,7 +57,7 @@ export default function History() {
     return (
       <Transition>
         <div>
-          <div className="px-(--space-4) py-(--space-6)">
+          <div>
             <div>
               <div className="flex flex-wrap gap-(--space-8) items-center justify-between my-(--space-4)">
                 <div>
@@ -68,7 +68,7 @@ export default function History() {
               <input type="text" placeholder="Search" className="w-full"  />
                 </div>
               </div>
-            <div>
+            <div className="my-(--space-6)">
                 {/* settings */}
                 <div className="flex flex-wrap gap-(--space-4)">
                   {settings.map((setting, index) => (
@@ -86,7 +86,7 @@ export default function History() {
               </div>}
               {data && 
               data.length > 0 ?
-              <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,400px))] gap-(--space-4) py-(--space-6) items-center justify-center">
+              <div className="grid grid-cols-[repeat(auto-fit,minmax(250px,350px))] gap-(--space-4) py-(--space-6) justify-center">
                 {data.map((item, index) => (
                   <HistoryItem key={index} item={item} index={index} />
                 ))}
