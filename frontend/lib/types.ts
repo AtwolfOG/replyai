@@ -14,6 +14,12 @@ export type Settings = {
   // default_language: string;
 }
 
+export type UpdateSettingsRequest = {
+  default_tone: string;
+  default_length: string;
+  default_audience: string;
+}
+
 export type Reply = {
   id: string;
   transcript: string;
@@ -35,4 +41,8 @@ export type GenerateReplyRequest = {
 export type GenerateReplyResponse = {
   id: string;
   reply: string;
+}
+
+export type CallbackResponse = {
+  access_token: string;
 }

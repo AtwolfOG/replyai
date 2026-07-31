@@ -3,7 +3,7 @@ import axios, {
   AxiosResponse,
   InternalAxiosRequestConfig,
 } from "axios";
-import { Reply, Settings } from "./types";
+import type { Reply, Settings, User, UpdateSettingsRequest } from "./types";
 
 
 let access_token: string = "";
@@ -123,33 +123,43 @@ api.interceptors.response.use(
 );
 
 
-export async function signin() {
+export async function signin(): Promise{
   const response = await api.post(signinPath);
   return response.data;
 }
 
 // TODO: add params
-export async function callback(searchParams: URLSearchParams) {
-  const response = await api.get(callbackPath, { params: searchParams });
+export async function callback(searchParams: URLSearchParams): Promise<CallbackResponse> {
+  const response = await api.get<CallbackResponse>(callbackPath, { params: searchParams });
   return response.data;
 }
 
 export async function getReplyById(id: string): Promise<Reply> {
-  const response = await api.get(`/replies/${id}`);
+  const response = await api.get<Reply>(`/replies/${id}`);
   return response.data;
 }
 
 export async function getReplies(): Promise<Reply[]> {
-  const response = await api.get(`/replies`);
+  const response = await api.get<Reply[]>(`/replies`);
   return response.data;
 }
 
 export async function generateReply(data: GenerateReplyRequest): Promise<GenerateReplyResponse> {
-  const response = await api.post(`/replies/generate`, data);
+  const response = await api.post<GenerateReplyResponse>(`/replies/generate`, data);
   return response.data;
 }
 
-export async function getSettings(): Settings {
-  const response = await api.get(`/users/settings`);
+export async function getSettings(): Promise<Settings> {
+  const response = await api.get<Settings>(`/users/settings`);
+  return response.data;
+}
+
+export async function getMe(): Promise<User> {
+  const response = await api.get<User>(`/users/me`);
+  return response.data;
+}
+
+export async function updateSettings(data: UpdateSettingsRequest): Promise<Settings> {
+  const response = await api.put<Settings>(`/users/settings`, data);
   return response.data;
 }

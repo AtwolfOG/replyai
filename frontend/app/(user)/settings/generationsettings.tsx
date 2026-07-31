@@ -1,4 +1,5 @@
 "use client"
+import { SlidersHorizontal } from "lucide-react"
 import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Switch } from "@/components/ui/switch";
@@ -6,7 +7,7 @@ import { ChevronDown, Settings as SettingsIcon, ShieldCheck } from "lucide-react
 import { useQuery } from "@tanstack/react-query";
 import { getSettings } from "@/lib/api";
 import { Loader } from "@/components/loader";
-import { useEffect } from "react";
+import { useEffect, useReducer } from "react";
 
 type SettingsReducer = {
   tone: string;
@@ -38,34 +39,56 @@ const settings = [
   },
 ]
 
-export function Settings({settingsState, dispatch, defaultSetting}: {settingsState: SettingsReducer, dispatch: (action: {type: string, payload: string}) => void, defaultSetting: boolean}) {
-  const {data, isLoading, isSuccess} = useQuery({
+export function GenerationSettings() {
+  const [state, dispatch] = useReducer<SettingsReducer>(reducer, {
+    tone: "",
+    length: "",
+    audience: "",
+    language: "",
+  })
+  const {data, isLoading, isSuccess, isError, refetch} = useQuery({
     queryKey: ["settings"],
     queryFn: getSettings,
     staleTime: Infinity,
     gcTime: Infinity,
   })
   useEffect(() => {
-    if (isSuccess && defaultSetting) {
+    if (isSuccess) {
       dispatch({type: "SET_SETTINGS", payload: {tone: data.default_tone, length: data.default_length, audience: data.default_audience}})
     }
-  }, [isSuccess, data, dispatch, defaultSetting])
+  }, [isSuccess, data, dispatch])
 
   if (isLoading) return <Loader />
-    return (
-      <>
-      <div className="flex items-center gap-(--space-2) mt-2 mb-4">
-          <SettingsIcon className="text-primary" size={20} />
-          <h4 className="">Reply settings</h4>
+  if (isError) return <div>
+        <p>Something went wrong</p>
+        <button onClick={() => refetch()}>Retry</button>
         </div>
+    return (
+      <div className="flex flex-col gap-(--space-2) max-w-2xl self-center my-(--space-12)">
+        <div className="flex items-center gap-(--space-4)">
+            <SlidersHorizontal className="text-primary" /> 
+            <h3>Generation Defaults</h3>
+        </div>
+
         <div>
           {/* settings */}
           <div className="flex flex-wrap gap-(--space-4)">
             {settings.map((setting, index) => (
               <div key={index} className="flex-1 min-w-[200px]">
-                <SettingItem key={index} label={setting.label} options={setting.options} value={settingsState[setting.label.toLowerCase() as keyof SettingsReducer]} onChange={dispatch} />
+                <SettingItem key={index} label={setting.label} options={setting.options} value={state[setting.label.toLowerCase() as keyof SettingsReducer]} onChange={dispatch} />
               </div>
             ))  }
+          </div>
+
+             <div className="flex items-center justify-between my-4 bg-(--surface-muted) p-(--space-2) rounded-xl border gap-(--space-2) cursor-not-allowed opacity-80">
+            <div className="flex items-center gap-(--space-2)">
+              <ShieldCheck size={32} />
+              <div className="flex flex-col">
+                <p>Auto copy</p>
+                <small>copy to clipboard on finish</small>
+              </div>
+            </div>
+              <Switch disabled size="default"/>
           </div>
           
           <div className="flex items-center justify-between my-4 bg-(--surface-muted) p-(--space-2) rounded-xl border gap-(--space-2) cursor-not-allowed opacity-80">
@@ -79,7 +102,7 @@ export function Settings({settingsState, dispatch, defaultSetting}: {settingsSta
               <Switch disabled size="default"/>
           </div>
         </div>
-    </>
+    </div>
     )
 }
 
@@ -104,4 +127,29 @@ function SettingItem({label, options, value, onChange}: {label: string, options:
       </div>
     </div>
   )
+}
+
+function reducer(state, action) {
+  switch (action.type) {
+    case "SET_SETTINGS":
+      return { ...state, ...action.payload };
+    case "SET_TONE":
+      return { ...state, tone: action.payload };
+    case "SET_LENGTH":
+      return { ...state, length: action.payload };
+    case "SET_TARGET_AUDIENCE":
+      return { ...state, targetAudience: action.payload };
+    case "SET_LANGUAGE":
+      return { ...state, language: action.payload };
+    case "SET_TRANSCRIPT":
+      return { ...state, transcript: action.payload };
+    case "SET_REPLY":
+      return { ...state, reply: action.payload };
+      case "ADD_TRANSCRIPT":
+        return { ...state, transcript: state.transcript + action.payload };
+    case "CLEAR_TRANSCRIPT":
+      return { ...state, transcript: "" };
+    default:
+      return state;
+  }
 }
