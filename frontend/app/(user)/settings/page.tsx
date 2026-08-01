@@ -23,10 +23,10 @@ export default function History() {
           <button onClick={() => refetch()}>Retry</button>
           </div>}
         {data && <div className="flex flex-col gap-4 ">
-         <div>
+         {/* <div>
           <h2>Settings</h2>
           <p>Manage your account settings</p>
-         </div> 
+         </div>  */}
          <div>
           <div className="flex flex-col items-center gap-4 p-(--space-8) rounded-lg">
             <div className="relative w-20 h-20 rounded-full overflow-hidden">

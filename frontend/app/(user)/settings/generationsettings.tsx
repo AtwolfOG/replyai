@@ -1,5 +1,5 @@
 "use client"
-import { SlidersHorizontal } from "lucide-react"
+import { Copy, SlidersHorizontal } from "lucide-react"
 import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Switch } from "@/components/ui/switch";
@@ -80,15 +80,15 @@ export function GenerationSettings() {
             ))  }
           </div>
 
-             <div className="flex items-center justify-between my-4 bg-(--surface-muted) p-(--space-2) rounded-xl border gap-(--space-2) cursor-not-allowed opacity-80">
+             <div className="flex items-center justify-between my-4 bg-(--surface-muted) p-(--space-2) rounded-xl border gap-(--space-2) opacity-80">
             <div className="flex items-center gap-(--space-2)">
-              <ShieldCheck size={32} />
+              <Copy size={32} />
               <div className="flex flex-col">
                 <p>Auto copy</p>
                 <small>copy to clipboard on finish</small>
               </div>
             </div>
-              <Switch disabled size="default"/>
+              <Switch size="default"/>
           </div>
           
           <div className="flex items-center justify-between my-4 bg-(--surface-muted) p-(--space-2) rounded-xl border gap-(--space-2) cursor-not-allowed opacity-80">
