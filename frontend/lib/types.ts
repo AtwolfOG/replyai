@@ -12,12 +12,14 @@ export type Settings = {
   default_length: string;
   default_audience: string;
   // default_language: string;
+  auto_copy: boolean;
 }
 
 export type UpdateSettingsRequest = {
   default_tone: string;
   default_length: string;
   default_audience: string;
+  auto_copy: boolean;
 }
 
 export type Reply = {
@@ -40,7 +42,7 @@ export type GenerateReplyRequest = {
 
 export type GenerateReplyResponse = {
   id: string;
-  reply: string;
+  generated_reply: string;
 }
 
 export type CallbackResponse = {

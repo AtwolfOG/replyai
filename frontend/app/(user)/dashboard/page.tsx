@@ -12,6 +12,7 @@ import { generateReply } from "@/lib/api";
 import { ReplyState } from "./types";
 import { GenerateReplyResponse } from "@/lib/types";
 import { Loader } from "@/components/loader";
+import { copyToClipboard } from "@/lib/copytoclipboard";
 
 export default function Dashboard() {
   const [state, dispatch] = useReducer<ReplyState>(reducer, {
@@ -32,6 +33,7 @@ export default function Dashboard() {
     }),
     onSuccess: (data: GenerateReplyResponse) => {
       dispatch({type: "SET_REPLY", payload: data.generated_reply})
+      copyToClipboard(data.generated_reply)
     }
   })
 
@@ -77,8 +79,8 @@ function reducer(state, action) {
       return { ...state, tone: action.payload };
     case "SET_LENGTH":
       return { ...state, length: action.payload };
-    case "SET_TARGET_AUDIENCE":
-      return { ...state, targetAudience: action.payload };
+    case "SET_AUDIENCE":
+      return { ...state, audience: action.payload };
     case "SET_LANGUAGE":
       return { ...state, language: action.payload };
     case "SET_TRANSCRIPT":

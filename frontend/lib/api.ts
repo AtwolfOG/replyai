@@ -28,7 +28,6 @@ api.interceptors.request.use(
   async (config: InternalAxiosRequestConfig) => {
     if (excludePaths.some((path) => config.url?.includes(path))) return config;
     const token = await getAccessToken();
-    console.log("token: ", token);
     
     // attach access token automatically
     config.headers.Authorization = `Bearer ${token}`;
@@ -104,11 +103,9 @@ api.interceptors.response.use(
     originalRequest._retry = true;
 
     try {
-      access_token = "";
+      access_token = await getAccessToken();
 
-      const token = await getAccessToken();
-
-      originalRequest.headers.Authorization = `Bearer ${token}`;
+      originalRequest.headers.Authorization = `Bearer ${access_token}`;
 
       return api(originalRequest);
 

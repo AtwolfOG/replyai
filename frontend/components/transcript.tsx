@@ -12,7 +12,8 @@ export function Transcript({transcript, dispatch, editable}: {transcript: string
               {editable && <Button variant="outline" className="bg-(--surface) cursor-pointer" onClick={() => dispatch({ type: "CLEAR_TRANSCRIPT" })}>Clear</Button>}
           </div>
           <div className="p-(--space-4) rounded-b-xl border">
-            <textarea contentEditable={editable} name="transcript" id="transcript" onChange={editable ?  (e) => dispatch({ type: "SET_TRANSCRIPT", payload: e.target.value }) : undefined} value={transcript} className="resize-none w-full h-70 bg-(--surface-muted) border rounded-xl p-(--space-4)"></textarea>
+            <textarea readOnly={!editable} name="transcript" id="transcript" onChange={editable ?  (e) => dispatch({ type: "SET_TRANSCRIPT", payload: e.target.value }) : ()=>
+            []} value={transcript} className="resize-none w-full h-70 bg-(--surface-muted) border rounded-xl p-(--space-4)"></textarea>
           </div>
       </div>
     )

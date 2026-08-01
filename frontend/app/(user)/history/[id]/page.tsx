@@ -92,8 +92,8 @@ function reducer(state, action) {
       return { ...state, tone: action.payload };
     case "SET_LENGTH":
       return { ...state, length: action.payload };
-    case "SET_TARGET_AUDIENCE":
-      return { ...state, targetAudience: action.payload };
+    case "SET_AUDIENCE":
+      return { ...state, audience: action.payload };
     // case "SET_LANGUAGE":
     //   return { ...state, language: action.payload };
     case "SET_TRANSCRIPT":
