@@ -27,11 +27,11 @@ const settings = [
     options: ["short", "medium", "long"],
     value: "short",
   },
-  {
-    label: "LANGUAGE",
-    options: ["English", "Spanish", "French"],
-    value: "English",
-  },
+  // {
+  //   label: "LANGUAGE",
+  //   options: ["English", "Spanish", "French"],
+  //   value: "English",
+  // },
 ]
 
 type Settings = {

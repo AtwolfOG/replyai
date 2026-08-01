@@ -3,7 +3,7 @@ import { Copy, SlidersHorizontal } from "lucide-react"
 import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Switch } from "@/components/ui/switch";
-import { ChevronDown, Settings as SettingsIcon, ShieldCheck } from "lucide-react";
+import { ChevronDown, ShieldCheck } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { getSettings } from "@/lib/api";
 import { Loader } from "@/components/loader";
@@ -32,11 +32,11 @@ const settings = [
     options: ["short", "medium", "long"],
     value: "short",
   },
-  {
-    label: "LANGUAGE",
-    options: ["English", "Spanish", "French"],
-    value: "English",
-  },
+  // {
+  //   label: "LANGUAGE",
+  //   options: ["English", "Spanish", "French"],
+  //   value: "English",
+  // },
 ]
 
 export function GenerationSettings() {

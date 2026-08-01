@@ -19,7 +19,7 @@ export default function Page() {
     tone: "casual",
     length: "short",
     audience: "general",
-    language: "English",
+    // language: "English",
     transcript: "",
     reply: "",
   });
@@ -94,8 +94,8 @@ function reducer(state, action) {
       return { ...state, length: action.payload };
     case "SET_TARGET_AUDIENCE":
       return { ...state, targetAudience: action.payload };
-    case "SET_LANGUAGE":
-      return { ...state, language: action.payload };
+    // case "SET_LANGUAGE":
+    //   return { ...state, language: action.payload };
     case "SET_TRANSCRIPT":
       return { ...state, transcript: action.payload };
     case "SET_REPLY":

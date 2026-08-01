@@ -44,7 +44,7 @@ export default function Dashboard() {
             {/* recording section */}
             <Recorder dispatch={dispatch}/>
             {/* transcript section */}
-            <Transcript transcript={state.transcript} dispatch={dispatch}/>
+            <Transcript transcript={state.transcript} dispatch={dispatch} editable/>
             </div>
 
             <div className="flex flex-col gap-(--space-12)">
