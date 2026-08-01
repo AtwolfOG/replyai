@@ -1,3 +1,4 @@
+from sqlalchemy.sql import expression
 from typing import TYPE_CHECKING
 from enum import Enum
 from sqlalchemy.orm import Mapped, mapped_column
@@ -44,6 +45,7 @@ class UserSettings(Base):
     default_tone: Mapped[SettingsTone] = mapped_column(String(50), default=SettingsTone.CASUAL)
     default_audience: Mapped[SettingsAudience] = mapped_column(String(50), default=SettingsAudience.GENERAL)
     default_length: Mapped[SettingsLength] = mapped_column(String(50), default=SettingsLength.MEDIUM)
+    auto_copy: Mapped[bool] = mapped_column(default=False, server_default=expression.false())
     created_at: Mapped[datetime] = mapped_column(default=func.now())
     updated_at: Mapped[datetime] = mapped_column(default=func.now(), onupdate=func.now())
 

@@ -44,7 +44,8 @@ export function GenerationSettings() {
     tone: "",
     length: "",
     audience: "",
-    language: "",
+    // language: "",
+    autoCopy: false,
   })
   const {data, isLoading, isSuccess, isError, refetch} = useQuery({
     queryKey: ["settings"],
@@ -88,7 +89,7 @@ export function GenerationSettings() {
                 <small>copy to clipboard on finish</small>
               </div>
             </div>
-              <Switch size="default"/>
+              <Switch onCheckedChange={(checked) => dispatch({type: "SET_AUTO_COPY", payload: checked})} size="default"/>
           </div>
           
           <div className="flex items-center justify-between my-4 bg-(--surface-muted) p-(--space-2) rounded-xl border gap-(--space-2) cursor-not-allowed opacity-80">
@@ -149,6 +150,8 @@ function reducer(state, action) {
         return { ...state, transcript: state.transcript + action.payload };
     case "CLEAR_TRANSCRIPT":
       return { ...state, transcript: "" };
+    case "SET_AUTO_COPY":
+      return { ...state, autoCopy: action.payload };
     default:
       return state;
   }

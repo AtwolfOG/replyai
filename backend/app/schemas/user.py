@@ -25,3 +25,4 @@ class UserSettingsBase(BaseModel):
     default_tone: str | None = None
     default_audience: str | None = None
     default_length: str | None = None
+    auto_copy: bool | None = None

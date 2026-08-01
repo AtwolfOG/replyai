@@ -85,7 +85,7 @@ export function Settings({settingsState, dispatch, defaultSetting}: {settingsSta
 
 function SettingItem({label, options, value, onChange}: {label: string, options: string[], value: string, onChange: (value: string) => void}) {
   return (
-    <div className="flex flex-col flex-1">
+    <div className="flex flex-col flex-1 max-w-2xs">
       <small className="w-max">{label}</small>
       <div className="flex items-center gap-(--space-2)">
         <DropdownMenu>
