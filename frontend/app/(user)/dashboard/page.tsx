@@ -1,5 +1,5 @@
 "use client"
-import Transition from "@/components/pageTransition"
+import Transition from "@/components/pagetransition"
 import { useReducer } from "react";
 import { Settings } from "@/components/settings";
 import { Reply } from "@/components/reply";
@@ -9,13 +9,13 @@ import { Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useMutation } from "@tanstack/react-query";
 import { generateReply } from "@/lib/api";
-import { ReplyState } from "./types";
+import { ReplyState, ReplyStateAction } from "./types";
 import { GenerateReplyResponse } from "@/lib/types";
 import { Loader } from "@/components/loader";
 import { copyToClipboard } from "@/lib/copytoclipboard";
 
 export default function Dashboard() {
-  const [state, dispatch] = useReducer<ReplyState>(reducer, {
+  const [state, dispatch] = useReducer<ReplyState, ReplyStateAction>(reducer, {
     tone: "casual",
     length: "short",
     audience: "general",
@@ -71,7 +71,7 @@ export default function Dashboard() {
     )
 }
 
-function reducer(state, action) {
+function reducer(state: ReplyState, action: ReplyStateAction) {
   switch (action.type) {
     case "SET_SETTINGS":
       return { ...state, ...action.payload };

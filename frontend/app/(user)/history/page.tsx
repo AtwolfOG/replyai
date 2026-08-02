@@ -1,5 +1,5 @@
 "use client"
-import Transition from "@/components/pageTransition"
+import Transition from "@/components/pagetransition"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { ChevronDown, Copy, SquareArrowOutUpRight, Trash2 } from "lucide-react";

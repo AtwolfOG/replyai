@@ -1,5 +1,5 @@
 "use client"
-import Transition from "@/components/pageTransition"
+import Transition from "@/components/pagetransition"
 import Image from "next/image"
 import { useQuery } from "@tanstack/react-query"
 import { getMe } from "@/lib/api"
