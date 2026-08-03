@@ -9,14 +9,7 @@ import { getSettings, updateSettings } from "@/lib/api";
 import { Loader } from "@/components/loader";
 import { useEffect, useReducer } from "react";
 import { toast } from "sonner";
-
-type SettingsReducer = {
-  tone: string;
-  length: string;
-  audience: string;
-  language: string;
-  auto_copy: boolean;
-}
+import { GeneralSettingsState, GeneralSettingsStateAction, SettingsState } from "@/lib/types";
 
 const settings = [
   {
@@ -34,19 +27,13 @@ const settings = [
     options: ["short", "medium", "long"],
     value: "short",
   },
-  // {
-  //   label: "LANGUAGE",
-  //   options: ["English", "Spanish", "French"],
-  //   value: "English",
-  // },
 ]
 
 export function GenerationSettings() {
-  const [state, dispatch] = useReducer<SettingsReducer>(reducer, {
-    tone: "",
-    length: "",
-    audience: "",
-    // language: "",
+  const [state, dispatch] = useReducer(reducer, {
+    tone: "casual",
+    length: "short",
+    audience: "general",
     auto_copy: false,
   })
   const {data, isLoading, isSuccess, isError, refetch} = useQuery({
@@ -65,7 +52,7 @@ export function GenerationSettings() {
 
   const 
   {mutate: updateSettingsMutation, isPending} = useMutation({
-    mutationFn: (data: SettingsReducer) => updateSettings({default_tone: data.tone, default_length: data.length, default_audience: data.audience, auto_copy: data.auto_copy}),
+    mutationFn: (data: GeneralSettingsState) => updateSettings({default_tone: data.tone, default_length: data.length, default_audience: data.audience, auto_copy: data.auto_copy}),
     onSuccess: async () => {
       await refetch()
       toast.success("Settings updated successfully")
@@ -90,7 +77,7 @@ export function GenerationSettings() {
           <div className="flex flex-wrap gap-(--space-4)">
             {settings.map((setting, index) => (
               <div key={index} className="flex-1 min-w-[200px]">
-                <SettingItem key={index} label={setting.label} options={setting.options} value={state[setting.label.toLowerCase() as keyof SettingsReducer]} onChange={(value) => updateSettingsMutation({...state, [setting.label.toLowerCase()]: value})} />
+                <SettingItem key={index} label={setting.label} options={setting.options} value={state[setting.label.toLowerCase() as keyof SettingsState]} onChange={(value) => updateSettingsMutation({...state, [setting.label.toLowerCase()]: value})} />
               </div>
             ))  }
           </div>
@@ -144,28 +131,10 @@ function SettingItem({label, options, value, onChange}: {label: string, options:
   )
 }
 
-function reducer(state, action) {
+function reducer(state: GeneralSettingsState, action: GeneralSettingsStateAction) {
   switch (action.type) {
     case "SET_SETTINGS":
       return { ...state, ...action.payload };
-    case "SET_TONE":
-      return { ...state, tone: action.payload };
-    case "SET_LENGTH":
-      return { ...state, length: action.payload };
-    case "SET_AUDIENCE":
-      return { ...state, audience: action.payload };
-    case "SET_LANGUAGE":
-      return { ...state, language: action.payload };
-    case "SET_TRANSCRIPT":
-      return { ...state, transcript: action.payload };
-    case "SET_REPLY":
-      return { ...state, reply: action.payload };
-      case "ADD_TRANSCRIPT":
-        return { ...state, transcript: state.transcript + action.payload };
-    case "CLEAR_TRANSCRIPT":
-      return { ...state, transcript: "" };
-    case "SET_AUTO_COPY":
-      return { ...state, autoCopy: action.payload };
     default:
       return state;
   }

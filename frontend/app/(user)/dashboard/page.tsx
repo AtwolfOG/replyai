@@ -9,17 +9,16 @@ import { Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useMutation } from "@tanstack/react-query";
 import { generateReply } from "@/lib/api";
-import { ReplyState, ReplyStateAction } from "./types";
+import { ReplyState, ReplyStateAction } from "@/lib/types";
 import { GenerateReplyResponse } from "@/lib/types";
 import { Loader } from "@/components/loader";
 import { copyToClipboard } from "@/lib/copytoclipboard";
 
 export default function Dashboard() {
-  const [state, dispatch] = useReducer<ReplyState, ReplyStateAction>(reducer, {
+  const [state, dispatch] = useReducer(reducer, {
     tone: "casual",
     length: "short",
     audience: "general",
-    language: "English",
     transcript: "",
     reply: "",
   });
@@ -81,8 +80,6 @@ function reducer(state: ReplyState, action: ReplyStateAction) {
       return { ...state, length: action.payload };
     case "SET_AUDIENCE":
       return { ...state, audience: action.payload };
-    case "SET_LANGUAGE":
-      return { ...state, language: action.payload };
     case "SET_TRANSCRIPT":
       return { ...state, transcript: action.payload };
     case "SET_REPLY":

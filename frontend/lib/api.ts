@@ -3,7 +3,7 @@ import axios, {
   AxiosResponse,
   InternalAxiosRequestConfig,
 } from "axios";
-import type { Reply, Settings, User, UpdateSettingsRequest } from "./types";
+import type { Reply, Settings, User, UpdateSettingsRequest, CallbackResponse, GenerateReplyRequest, GenerateReplyResponse } from "./types";
 
 
 let access_token: string = "";
@@ -59,6 +59,7 @@ export async function getAccessToken(): Promise<string> {
       return access_token;
     } catch {
       window.location.href = process.env.NEXT_PUBLIC_BACKEND_URL + "/auth/signin";
+      return "";
     } finally {
       tokenPromise = null;
     }
@@ -113,17 +114,15 @@ api.interceptors.response.use(
       // logout user
       window.location.href = process.env.NEXT_PUBLIC_FRONTEND_URL + "/auth/signin";
       return Promise.reject(refreshError);
-    } finally {
-      isRefreshing = false;
     }
   }
 );
 
 
-export async function signin(): Promise{
-  const response = await api.post(signinPath);
-  return response.data;
-}
+// export async function signin(): Promise{
+//   const response = await api.post(signinPath);
+//   return response.data;
+// }
 
 // TODO: add params
 export async function callback(searchParams: URLSearchParams): Promise<CallbackResponse> {

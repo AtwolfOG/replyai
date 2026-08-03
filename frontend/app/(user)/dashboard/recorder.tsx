@@ -1,12 +1,11 @@
 "use client"
 import { Mic } from "lucide-react"
-import { memo, useEffect, useRef, useState } from "react";
+import { ActionDispatch, memo, useEffect, useRef, useState } from "react";
 import { motion } from "motion/react";
 import { toast } from "sonner";
+import { ReplyStateAction, SpeechRecognitionErrorEvent, SpeechRecognitionEvent } from "@/lib/types";
 
-type Action = {type: string, payload: string}
-
- function Recorder({ dispatch}: {dispatch: (action: Action) => void}) {
+ function Recorder({ dispatch}: {dispatch: ActionDispatch<[action: ReplyStateAction]>}) {
   const [isRecording, setIsRecording] = useState(false);
   const [ speechRecognition, setSpeechRecognition] = useState<SpeechRecognition | null>(null);
   const recordRef = useRef<HTMLButtonElement>(null);
@@ -18,13 +17,13 @@ type Action = {type: string, payload: string}
           setSpeechRecognition(null);
         }
       } else {
-        const speechRecognition = startTranscript(setSpeechRecognition, dispatch);
+        const speechRecognition = startTranscript(setSpeechRecognition);
         if (speechRecognition) {
           
           setSpeechRecognition(speechRecognition);
           setIsRecording(true);
           // handle result
-          speechRecognition.onresult = (event) => {
+          speechRecognition.onresult = (event: SpeechRecognitionEvent) => {
             for (let i = event.resultIndex; i < event.results.length; ++i) {
               if (event.results[i].isFinal) {
                 dispatch({ type: "ADD_TRANSCRIPT", payload: " " + event.results[i][0].transcript });
@@ -33,7 +32,7 @@ type Action = {type: string, payload: string}
             
           };
           // handle error
-          speechRecognition.onerror = (event) => {
+          speechRecognition.onerror = (event: SpeechRecognitionErrorEvent) => {
             toast.error("Speech recognition error detected: " + event.error);
           };
           // handle end

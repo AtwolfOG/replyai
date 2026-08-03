@@ -11,15 +11,14 @@ import { useQuery } from "@tanstack/react-query";
 import { ArrowLeft, Copy, Trash2 } from "lucide-react";
 import { useParams } from "next/navigation";
 import { useEffect, useReducer } from "react";
-import { ReplyState } from "./types";
+import { ReplyState, ReplyStateAction } from "@/lib/types";
 
 export default function Page() {
   const {id} = useParams();
-  const [state, dispatch] = useReducer<ReplyState>(reducer, {
+  const [state, dispatch] = useReducer(reducer, {
     tone: "casual",
     length: "short",
     audience: "general",
-    // language: "English",
     transcript: "",
     reply: "",
   });
@@ -34,7 +33,7 @@ export default function Page() {
     if (data) {
       dispatch({ type: "SET_TRANSCRIPT", payload: data.transcript });
       dispatch({ type: "SET_REPLY", payload: data.generated_reply });
-      dispatch({ type: "SET_SETTINGS", payload: { tone: data.tone, length: data.length, audience: data.audience } })
+      dispatch({ type: "SET_SETTINGS", payload: { tone: data.tone as ReplyState["tone"], length: data.length as ReplyState["length"], audience: data.audience as ReplyState["audience"] } })
     }
   }, [data])
     return (
@@ -66,7 +65,7 @@ export default function Page() {
                   </div>
                 </div>
                 <div className="flex flex-col gap-(--space-4) my-(--space-8)">
-                  <Transcript transcript={data.transcript} dispatch={dispatch} />
+                  <Transcript transcript={data.transcript} dispatch={dispatch} editable={false} />
                   <div className="border rounded-xl bg-(--surface)">
                     <Reply reply={data.generated_reply} />
                   </div>
@@ -84,7 +83,7 @@ export default function Page() {
     )
 }
 
-function reducer(state, action) {
+function reducer(state: ReplyState, action: ReplyStateAction) {
   switch (action.type) {
     case "SET_SETTINGS":
       return { ...state, ...action.payload };
@@ -94,8 +93,6 @@ function reducer(state, action) {
       return { ...state, length: action.payload };
     case "SET_AUDIENCE":
       return { ...state, audience: action.payload };
-    // case "SET_LANGUAGE":
-    //   return { ...state, language: action.payload };
     case "SET_TRANSCRIPT":
       return { ...state, transcript: action.payload };
     case "SET_REPLY":

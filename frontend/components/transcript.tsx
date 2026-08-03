@@ -1,7 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { RotatingBtn } from "./rotatingbtn";
+import { ActionDispatch } from "react";
+import { ReplyStateAction } from "@/lib/types";
 
-export function Transcript({transcript, dispatch, editable}: {transcript: string, dispatch: (action: Action) => void, editable: boolean}) {
+export function Transcript({transcript, dispatch, editable}: {transcript: string, dispatch: ActionDispatch<[action: ReplyStateAction]>, editable: boolean}) {
     return (
         <div className=" shadow-lg rounded-xl rounded-t-none pt-0 row-2 bg-(--surface)">
           <div className="bg-(--primary)/10 p-(--space-4) flex items-center justify-between">

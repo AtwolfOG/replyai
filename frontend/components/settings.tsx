@@ -6,39 +6,50 @@ import { ChevronDown, Settings as SettingsIcon, ShieldCheck } from "lucide-react
 import { useQuery } from "@tanstack/react-query";
 import { getSettings } from "@/lib/api";
 import { Loader } from "@/components/loader";
-import { useEffect } from "react";
+import { ActionDispatch, useEffect } from "react";
+import { GeneralSettingsStateAction, SettingsState, SettingsStateAction } from "@/lib/types";
 
-type SettingsReducer = {
-  tone: string;
-  length: string;
-  audience: string;
-  language: string;
-}
 
-const settings = [
+type SettingItems =  {
+      label: "TONE";
+      options: SettingsState["tone"][];
+      value: SettingsState["tone"];
+      actionType: "SET_TONE";
+    }
+  | {
+      label: "LENGTH";
+      options: SettingsState["length"][];
+      value: SettingsState["length"];
+      actionType: "SET_LENGTH";
+    }
+  | {
+      label: "AUDIENCE";
+      options: SettingsState["audience"][];
+      value: SettingsState["audience"];
+      actionType: "SET_AUDIENCE";
+    };
+const settings: SettingItems[] = [
   {
     label: "TONE",
     options: ["casual", "friendly", "professional", "educational", "humorous", "persuasive"],
     value: "casual",
+    actionType: "SET_TONE"
   },
   {
     label: "AUDIENCE",
     options: ["general", "student", "developer", "professional", "academic", "social media"],
     value: "general",
+    actionType: "SET_AUDIENCE"
   },
   {
     label: "LENGTH",
     options: ["short", "medium", "long"],
     value: "short",
+    actionType: "SET_LENGTH"
   },
-  // {
-  //   label: "LANGUAGE",
-  //   options: ["English", "Spanish", "French"],
-  //   value: "English",
-  // },
 ]
 
-export function Settings({settingsState, dispatch, defaultSetting}: {settingsState: SettingsReducer, dispatch: (action: {type: string, payload: string}) => void, defaultSetting: boolean}) {
+export function Settings({settingsState, dispatch, defaultSetting}: {settingsState: SettingsState, dispatch: ActionDispatch<[action: SettingsStateAction | GeneralSettingsStateAction]>, defaultSetting: boolean}) {
   const {data, isLoading, isSuccess} = useQuery({
     queryKey: ["settings"],
     queryFn: getSettings,
@@ -63,7 +74,7 @@ export function Settings({settingsState, dispatch, defaultSetting}: {settingsSta
           <div className="flex flex-wrap gap-(--space-4)">
             {settings.map((setting, index) => (
               <div key={index} className="flex-1 min-w-[200px]">
-                <SettingItem key={index} label={setting.label} options={setting.options} value={settingsState[setting.label.toLowerCase() as keyof SettingsReducer]} onChange={dispatch} />
+                <SettingItem key={index} setting={setting} value={settingsState[setting.label.toLowerCase() as keyof SettingsState]} onChange={dispatch} />
               </div>
             ))  }
           </div>
@@ -83,10 +94,15 @@ export function Settings({settingsState, dispatch, defaultSetting}: {settingsSta
     )
 }
 
-function SettingItem({label, options, value, onChange}: {label: string, options: string[], value: string, onChange: (value: string) => void}) {
+type SettingItemProps = {
+  setting: SettingItems,
+  value: string,
+  onChange: ActionDispatch<[action: SettingsStateAction | GeneralSettingsStateAction]>
+}
+function SettingItem({setting, value, onChange}: SettingItemProps) {
   return (
     <div className="flex flex-col flex-1 max-w-2xs">
-      <small className="w-max">{label}</small>
+      <small className="w-max">{setting.label}</small>
       <div className="flex items-center gap-(--space-2)">
         <DropdownMenu>
   <DropdownMenuTrigger render={<Button className="flex w-full justify-between gap-(--space-2)" variant="outline" />}>
@@ -94,9 +110,33 @@ function SettingItem({label, options, value, onChange}: {label: string, options:
   </DropdownMenuTrigger>
   <DropdownMenuContent>
     <DropdownMenuGroup>
-      <DropdownMenuLabel>{label}</DropdownMenuLabel>
-      {options.map((option, index) => (
-        <DropdownMenuItem  className={option === value ? "bg-foreground/70 text-primary-foreground" : ""} key={index} onClick={() => onChange({type: `SET_${label}`, payload: option})}>{option}</DropdownMenuItem>
+      <DropdownMenuLabel>{setting.label}</DropdownMenuLabel>
+      {setting.options.map((option, index) => (
+        <DropdownMenuItem  className={option === value ? "bg-foreground/70 text-primary-foreground" : ""} key={index} onClick={() => {
+          switch (setting.actionType) {
+    case "SET_TONE":
+      onChange({
+        type: "SET_TONE",
+        payload: option as SettingsState["tone"],
+      });
+      break;
+
+    case "SET_LENGTH":
+      onChange({
+        type: "SET_LENGTH",
+        payload: option as SettingsState["length"],
+      });
+      break;
+
+    case "SET_AUDIENCE":
+      onChange({
+        type: "SET_AUDIENCE",
+        payload: option as SettingsState["audience"],
+      });
+      break;
+  }
+
+        }}>{option}</DropdownMenuItem>
       ))}
     </DropdownMenuGroup>
   </DropdownMenuContent>
