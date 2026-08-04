@@ -54,7 +54,6 @@ async def auth_callback(request: Request, response: Response, db: Session = Depe
   try:
     token = await oauth.google.authorize_access_token(request)
   except OAuthError as error:
-    print(error)
     raise APIException(status_code=400, message=f"Authentication failed: {error.error}")
   
   try:
@@ -90,8 +89,7 @@ async def auth_callback(request: Request, response: Response, db: Session = Depe
     )
 
     return SigninResponse(access_token=access_token)
-  except Exception as error:
-    print(error)
+  except Exception:
     raise APIException(status_code=400, message=" Authentication failed")
 
 @auth_router.post("/logout", responses={400: {"model": APIExceptionResponse}, 500: {"model": APIExceptionResponse}})
