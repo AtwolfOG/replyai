@@ -21,6 +21,7 @@ class Settings(BaseSettings):
     SECRET_KEY: str
     GEMINI_API_KEY: str
     FRONTEND_URL: str
+    BACKEND_URL: str
 
 settings = Settings()
 

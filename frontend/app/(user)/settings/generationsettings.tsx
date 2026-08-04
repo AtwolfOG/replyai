@@ -65,7 +65,7 @@ export function GenerationSettings() {
         <button onClick={() => refetch()}>Retry</button>
         </div>
     return (
-      <div className="flex flex-col gap-(--space-2) max-w-2xl self-center my-(--space-12)">
+      <div className="flex flex-col gap-(--space-2) max-w-2xl self-center">
         {isPending && <Loader overlay fullscreen />}
         <div className="flex items-center gap-(--space-4)">
             <SlidersHorizontal className="text-primary" /> 

@@ -130,6 +130,10 @@ export async function callback(searchParams: URLSearchParams): Promise<CallbackR
   return response.data;
 }
 
+export async function logout(): Promise<void> {
+  await api.post<void>(`/auth/logout`);
+}
+
 export async function getReplyById(id: string): Promise<Reply> {
   const response = await api.get<Reply>(`/replies/${id}`);
   return response.data;
