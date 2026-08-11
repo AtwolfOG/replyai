@@ -6,13 +6,12 @@ import AppTabs from '@/components/app-tabs';
 
 SplashScreen.preventAutoHideAsync();
 
-export default function TabLayout({children}: {children: React.ReactNode}) {
+export default function TabLayout() {
   SplashScreen.hideAsync();
   const colorScheme = useColorScheme();
   return (
     <>
     <View style={styles.container}>
-      {children}
       <AppTabs />
     </View>
     </>

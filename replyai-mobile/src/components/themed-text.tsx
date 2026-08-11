@@ -50,13 +50,13 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   title: {
-    fontSize: 48,
+    fontSize: 32,
     fontWeight: 600,
     lineHeight: 52,
     color: 'black',
   },
   subtitle: {
-    fontSize: 32,
+    fontSize: 28,
     lineHeight: 44,
     fontWeight: 600,
     color: 'black',

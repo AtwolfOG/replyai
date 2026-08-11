@@ -124,6 +124,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
+    backdropFilter: [{blur: 10}],
   },
   tabBarOuter: {
     flexDirection: 'row',
@@ -140,7 +141,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
-    paddingVertical: defaultStyles.spacing["4xl"],
+    paddingVertical: defaultStyles.spacing.md,
   },
   tabBarBlur: {
     flex: 1,
