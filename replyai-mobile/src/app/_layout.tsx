@@ -1,24 +1,22 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
-import { useColorScheme, View, StyleSheet } from 'react-native';
+import { View } from 'react-native';
 
-import AppTabs from '@/components/app-tabs';
+import AppTabs from '@/src/components/app-tabs';
+
+import { GluestackUIProvider } from '@/components/ui/gluestack-ui-provider';
+import '@/src/global.css';
 
 SplashScreen.preventAutoHideAsync();
 
 export default function TabLayout() {
   SplashScreen.hideAsync();
-  const colorScheme = useColorScheme();
   return (
-    <>
-    <View style={styles.container}>
-      <AppTabs />
-    </View>
-    </>
+    
+    <GluestackUIProvider mode="dark">
+      <View className="flex-1">
+        <AppTabs />
+      </View>
+    </GluestackUIProvider>
+  
   );
 }
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});

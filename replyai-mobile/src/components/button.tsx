@@ -1,53 +1,34 @@
-import { defaultStyles } from "@/lib/styles"
-import { StyleSheet, Text, TouchableOpacity } from "react-native"
+import { Text, TouchableOpacity } from "react-native"
 
-export default function Button({children, onPress, variant = "outline"}: {children: React.ReactNode, onPress: () => void, variant: "primary" | "secondary" | "accent" | "destructive" | "outline"}) {
+type ButtonVariant = "primary" | "secondary" | "accent" | "destructive" | "outline";
+
+const baseContainerClass = "p-xl bg-surface-muted border border-border rounded-lg";
+
+const containerClasses: Record<ButtonVariant, string> = {
+    primary: "bg-primary",
+    secondary: "bg-secondary",
+    accent: "bg-accent",
+    destructive: "bg-destructive",
+    outline: "",
+};
+
+const textClasses: Record<ButtonVariant, string> = {
+    primary: "text-primary-foreground",
+    secondary: "text-secondary-foreground",
+    accent: "text-accent-foreground",
+    destructive: "text-primary-foreground",
+    outline: "text-text-body",
+};
+
+export default function Button({children, onPress, variant = "outline"}: {children: React.ReactNode, onPress: () => void, variant?: ButtonVariant}) {
     return (
-        <TouchableOpacity onPress={onPress} style={[containerStyles.container, containerStyles[variant]]}>
-            <Text style={textStyles[variant]}>{children}</Text>
+        <TouchableOpacity 
+            onPress={onPress} 
+            className={`${baseContainerClass} ${containerClasses[variant]}`}
+        >
+            <Text className={textClasses[variant]}>{children}</Text>
         </TouchableOpacity>
     )
 }
 
-const containerStyles = StyleSheet.create({
-    container: {
-        padding: defaultStyles.spacing.xl,
-        backgroundColor: defaultStyles.colors.surfaceMuted,
-        borderWidth: 1,
-        borderColor: defaultStyles.colors.border,
-        borderRadius: defaultStyles.radius.lg,
-    },
-    primary: {
-        backgroundColor: defaultStyles.colors.primary,
-    },
-    secondary: {
-        backgroundColor: defaultStyles.colors.secondary,
-    },
-    accent: {
-        backgroundColor: defaultStyles.colors.accent,
-    },
-    destructive: {
-        backgroundColor: defaultStyles.colors.destructive,
-    },
-    outline: {
-        // backgroundColor: defaultStyles.colors.surface,
-    },
-})
 
-const textStyles = StyleSheet.create({
-    primary: {
-        color: defaultStyles.colors.primaryForeground,
-    },
-    secondary: {
-        color: defaultStyles.colors.secondaryForeground,
-    },
-    accent: {
-        color: defaultStyles.colors.accentForeground,
-    },
-    destructive: {
-        color: defaultStyles.colors.primaryForeground,
-    },
-    outline: {
-        color: defaultStyles.colors.textBody,
-    },
-})

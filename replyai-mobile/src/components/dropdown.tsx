@@ -16,19 +16,22 @@ const DropdownContext = createContext<DropdownContextValue | null>(null);
 
 export function Dropdown({children}: {children: React.ReactNode}) {
   const [visible, setVisible] = useState(false);
+  const [position, setPosition] = useState({x: 0, y: 0});
+  const [size, setSize] = useState({width: 0, height: 0});
   
     return (
-    <DropdownContext.Provider value={{ open: visible, setOpen: setVisible }}>
+    <DropdownContext.Provider value={{ open: visible, setOpen: setVisible, position, setPosition, size, setSize }}>
       {children}
     </DropdownContext.Provider>
   );
 
 }
 
-export function DropdownTrigger({children, style}: {children: React.ReactNode, style?: StyleProp<ViewStyle>}) {
+
+export function DropdownTrigger({children, className, style}: {children: React.ReactNode, className?: string, style?: StyleProp<ViewStyle>}) {
   const { setOpen } = useDropdown();
   return (
-    <TouchableOpacity onLayout={(e) => {}} style={[styles.trigger, style]} onPress={() => setOpen(true)}>
+    <TouchableOpacity onLayout={(e) => {}} className={className} style={style} onPress={() => setOpen(true)}>
       {children}
     </TouchableOpacity>
   );
@@ -38,7 +41,7 @@ export function DropdownContent({children}: {children: React.ReactNode}) {
   const { open, setOpen } = useDropdown();
   return (
     <Modal transparent statusBarTranslucent visible={open} animationType="fade">
-      <View style={styles.fullScreenOverlay}>
+      <View className="flex-1 bg-black/10 justify-center items-center">
         <ThemedText>I am full screen!</ThemedText>
         <TouchableOpacity onPress={() => setOpen(false)}>
           <ThemedText>Close</ThemedText>
@@ -58,11 +61,4 @@ function useDropdown() {
 
   return context;
 }
-const styles = StyleSheet.create({
-  fullScreenOverlay: {
-    flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.1)', // Dimmed overlay
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
+

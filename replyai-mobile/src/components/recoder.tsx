@@ -1,19 +1,18 @@
-import { StyleSheet, View } from "react-native";
-import { defaultStyles } from "@/lib/styles";
+import { View } from "react-native";
 import Animated, { useSharedValue, withSpring } from "react-native-reanimated";
 import { useEffect } from "react";
 
 export default function Recoder() {
     return (
-        <View style={styles.container}>
+        <View className="flex-row gap-xs p-xl">
           {Array.from({ length: 10 }).map((_, index) => (
-            <Bar key={index} isRecording={true} />
+            <Bar key={index} isRecording={true} strokeIndex={index} />
           ))}
         </View>
     )
 }
 
-function Bar({isRecording}: {isRecording: boolean}) {
+function Bar({isRecording, strokeIndex}: {isRecording: boolean, strokeIndex: number}) {
   const scaleY = useSharedValue(getRandomScale());
   useEffect(() => {
     if (isRecording) {
@@ -24,7 +23,10 @@ function Bar({isRecording}: {isRecording: boolean}) {
     }
   }, [isRecording]);
     return (
-        <Animated.View style={[styles.bar, { transform: [{ scaleY }] }]}></Animated.View>
+        <Animated.View 
+            className="w-[5px] h-[50px] rounded-[2px] bg-primary"
+            style={{ transformOrigin: "center", transform: [{ scaleY }] }}
+        />
     )
 }
 
@@ -36,18 +38,3 @@ function getRandomScale() {
   return scale;
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flexDirection: "row",
-        gap: defaultStyles.spacing.xs,
-        padding: defaultStyles.spacing.xl,
-    },
-    bar: {
-        transformOrigin: "center",
-        scaleY: 1, 
-        width: 5,
-        height: 50,
-        borderRadius: 2,
-        backgroundColor: defaultStyles.colors.primary,
-    }
-})
