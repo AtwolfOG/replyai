@@ -1,14 +1,23 @@
 import AccentButton from "@/src/components/accent-button";
-import Button from "@/src/components/button";
+import { Button, CButton } from "@/src/components/button";
 import Container from "@/src/components/container";
-import { Dropdown, DropdownContent, DropdownTrigger } from "@/src/components/dropdown";
 import Recoder from "@/src/components/recoder";
 import { ThemedText } from "@/src/components/themed-text";
 import Lucide from "@react-native-vector-icons/lucide";
 import { TextInput, View } from "react-native";
-import { Menu, MenuItem, MenuItemLabel, MenuSeparator } from "@/src/components/ui/menu";
+import { Settings } from "@/src/components/settings";
+import { useReducer } from "react";
+import { ReplyState, ReplyStateAction } from "@/src/lib/types";
+import { Switch } from "@/src/components/ui/switch";
 
 export default function Home() {
+    const [state, dispatch] = useReducer(reducer, {
+        tone: "casual",
+        length: "short",
+        audience: "general",
+        transcript: "",
+        reply: ""
+    });
     return (
         <Container>
             <View className="gap-8">
@@ -43,39 +52,57 @@ export default function Home() {
             </View>
 
             {/* Settings  */}
-            <View className="bg-surface gap-1 p-3 rounded-lg">
+            <View className="bg-surface gap-1 px-4 py-8 rounded-lg">
                 <View className="flex-row items-center gap-2">
                     <Lucide name="settings" size={24} className="text-primary" />
                     <ThemedText type="subtitle">Settings</ThemedText>
                 </View>
-                <Dropdown>
-                    <DropdownTrigger>
-                        <ThemedText>Select Language</ThemedText>
-                    </DropdownTrigger>
-                    <DropdownContent>
-                        <ThemedText type="default">English</ThemedText>
-                        <ThemedText type="default">Spanish</ThemedText>
-                        <ThemedText type="default">French</ThemedText>
-                    </DropdownContent>
-                </Dropdown>
+            <Settings settingsState={state} dispatch={dispatch} defaultSetting={false} />
 
-                <Menu placement="top" trigger={(triggerProps) => {console.log(triggerProps);return<Button {...triggerProps}>Select Language</Button>}}>
-                        <MenuItem key="English" textValue="English">
-                            {/* <Lucide name="plugins" size={24} className="text-primary" /> */}
-                            <MenuItemLabel size="default">English</MenuItemLabel>
-                        </MenuItem>
-                        <MenuItem key="Spanish" textValue="Spanish">
-                            {/* <Lucide name="plugins" size={24} className="text-primary" /> */}
-                            <MenuItemLabel size="default">Spanish</MenuItemLabel>
-                        </MenuItem>
-                        <MenuSeparator />
-                        <MenuItem key="French" textValue="French">
-                            {/* <Lucide name="plugins" size={24} className="text-primary" /> */}
-                            <MenuItemLabel size="default">French</MenuItemLabel>
-                        </MenuItem>
-                </Menu>
+            <View className="flex-row items-center justify-between border border-border p-3 rounded-lg bg-surface-muted opacity-80">
+                <View className="flex-row items-center gap-2">
+                    <Lucide name="shield-check" size={32} className="text-muted!" />
+                    <View>
+                        <ThemedText type="default">Fact Check</ThemedText>
+                        <ThemedText type="small">Fact check your replies</ThemedText>
+                    </View>
+                </View>
+                <Switch isDisabled={true} isSelected={false} />
+            </View>
+
+            <View className="my-4">
+                <CButton className="bg-primary">
+                    <View className="flex-row items-center gap-2">
+                        <ThemedText className="text-primary-foreground!" type="default">Generate Reply</ThemedText> <Lucide name="sparkles" size={24} className="text-primary-foreground!" />
+                    </View>
+                </CButton>
+            </View>
+               
             </View>
         </View>
         </Container>
     );
+}
+
+function reducer(state: ReplyState, action: ReplyStateAction) {
+  switch (action.type) {
+    case "SET_SETTINGS":
+      return { ...state, ...action.payload };
+    case "SET_TONE":
+      return { ...state, tone: action.payload };
+    case "SET_LENGTH":
+      return { ...state, length: action.payload };
+    case "SET_AUDIENCE":
+      return { ...state, audience: action.payload };
+    case "SET_TRANSCRIPT":
+      return { ...state, transcript: action.payload };
+    case "SET_REPLY":
+      return { ...state, reply: action.payload };
+      case "ADD_TRANSCRIPT":
+        return { ...state, transcript: state.transcript + action.payload };
+    case "CLEAR_TRANSCRIPT":
+      return { ...state, transcript: "" };
+    default:
+      return state;
+  }
 }

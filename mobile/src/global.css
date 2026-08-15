@@ -89,6 +89,23 @@
   --text-link: #004ac6;
   --text-link-hover: #2563eb;
   --text-error: #ba1a1a;
+
+
+
+  /* Gluestack / semantic aliases */
+  --color-card: #ffffff;
+  --color-card-foreground: #131b2e;
+
+  --color-popover: #ffffff;
+  --color-popover-foreground: #131b2e;
+
+  --color-muted-foreground: #434655;
+
+  --color-accent: #eaedff;
+  --color-accent-foreground: #131b2e;
+
+  --color-input: #c3c6d7;
+  --color-ring: #004ac6;
 }
 
 /* ─── Dark theme ──────────────────────────────────────────── */
@@ -132,4 +149,20 @@
   --color-ring: var(--primary);
 
   --color-destructive: var(--destructive);
+
+
+
+    --color-card: var(--surface);
+  --color-card-foreground: var(--foreground);
+
+  --color-popover: var(--surface);
+  --color-popover-foreground: var(--foreground);
+
+  --color-muted-foreground: var(--text-muted);
+
+  --color-accent: var(--surface-accent);
+  --color-accent-foreground: var(--foreground);
+
+  --color-input: var(--border);
+  --color-ring: var(--primary);
 }

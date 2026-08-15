@@ -4,6 +4,7 @@ import '@/src/global.css';
 import { View } from "react-native";
 import AppTabs from "@/src/components/app-tabs";
 import Lucide from "@react-native-vector-icons/lucide";
+
 // @ts-ignore
 // import { cssInterop } from "nativewind";
 
@@ -16,10 +17,11 @@ import Lucide from "@react-native-vector-icons/lucide";
 //   },
 // });
 
-export default function RootLayout() {
+export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <GluestackUIProvider mode="light">
       <View className="flex-1">
+        {children}
         <AppTabs />
       </View>
     </GluestackUIProvider>
