@@ -49,9 +49,9 @@ export function Settings({settingsState, dispatch, defaultSetting}: {settingsSta
   return (
       <View className="gap-4 my-4">
         {settings.map((setting) => (
-          <View className="gap-2">
+          <View key={setting.label} className="gap-2">
             <ThemedText type="small">{setting.label}</ThemedText>
-            <SettingItem key={setting.label} setting={setting} value={settingsState[setting.label.toLowerCase() as keyof SettingsState]} onChange={dispatch} />
+            <SettingItem setting={setting} value={settingsState[setting.label.toLowerCase() as keyof SettingsState]} onChange={dispatch} />
           </View>
       ))}
       </View>

@@ -1,4 +1,3 @@
-import AccentButton from "@/components/accent-button";
 import { Button, CButton } from "@/components/button";
 import Container from "@/components/container";
 import Recoder from "@/components/recoder";
@@ -9,6 +8,8 @@ import { Settings } from "@/components/settings";
 import { useReducer } from "react";
 import { ReplyState, ReplyStateAction } from "@/lib/types";
 import { Switch } from "@/components/ui/switch";
+import { Transcript } from "@/components/transcript";
+import { Reply } from "@/components/reply";
 
 export default function Home() {
     const [state, dispatch] = useReducer(reducer, {
@@ -36,20 +37,7 @@ export default function Home() {
                     </View>
                 </View>
             {/* Transcription */}
-            <View className="border-border">
-                <View className="flex-row items-center justify-between gap-1 p-3 bg-surface-muted rounded-t-lg">
-                    <View className="flex-row items-center gap-1">
-                        <ThemedText type="subtitle">Transcription</ThemedText>
-                        <AccentButton text="Editable" />
-                    </View>
-                    <Button onPress={() => {}}>
-                        Copy
-                    </Button>
-                </View>
-                <View className="p-3 border border-border bg-surface rounded-b-lg">
-                    <TextInput style={{ textAlignVertical: 'top' }} className="min-h-[200px] p-3 bg-surface-muted border border-border rounded" multiline />
-                </View>
-            </View>
+            <Transcript editable={true} transcript={state.transcript} dispatch={dispatch} />
 
             {/* Settings  */}
             <View className="bg-surface gap-1 px-4 py-8 rounded-lg">
@@ -70,14 +58,18 @@ export default function Home() {
                 <Switch isDisabled={true} isSelected={false} />
             </View>
 
-            <View className="my-4">
+            <View className="mt-4">
                 <CButton className="bg-primary">
                     <View className="flex-row items-center gap-2">
-                        <ThemedText className="text-primary-foreground!" type="default">Generate Reply</ThemedText> <Lucide name="sparkles" size={24} className="text-primary-foreground!" />
+                        <ThemedText className="text-primary-foreground!" type="default">Generate Reply</ThemedText><Lucide name="sparkles" size={24} className="text-primary-foreground!" />
                     </View>
                 </CButton>
             </View>
-               
+            </View>
+
+            {/* Reply */}
+            <View>
+                <Reply reply={state.reply} />
             </View>
         </View>
         </Container>
