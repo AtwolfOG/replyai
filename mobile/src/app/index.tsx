@@ -1,14 +1,14 @@
-import AccentButton from "@/src/components/accent-button";
-import { Button, CButton } from "@/src/components/button";
-import Container from "@/src/components/container";
-import Recoder from "@/src/components/recoder";
-import { ThemedText } from "@/src/components/themed-text";
+import AccentButton from "@/components/accent-button";
+import { Button, CButton } from "@/components/button";
+import Container from "@/components/container";
+import Recoder from "@/components/recoder";
+import { ThemedText } from "@/components/themed-text";
 import Lucide from "@react-native-vector-icons/lucide";
 import { TextInput, View } from "react-native";
-import { Settings } from "@/src/components/settings";
+import { Settings } from "@/components/settings";
 import { useReducer } from "react";
-import { ReplyState, ReplyStateAction } from "@/src/lib/types";
-import { Switch } from "@/src/components/ui/switch";
+import { ReplyState, ReplyStateAction } from "@/lib/types";
+import { Switch } from "@/components/ui/switch";
 
 export default function Home() {
     const [state, dispatch] = useReducer(reducer, {

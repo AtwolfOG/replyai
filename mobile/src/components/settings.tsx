@@ -1,10 +1,10 @@
-import { SettingsState } from "@/src/lib/types";
-import { CButton } from "@/src/components/button";
-import { Menu, MenuItem, MenuItemLabel, MenuSeparator } from "@/src/components/ui/menu";
+import { SettingsState } from "@/lib/types";
+import { CButton } from "@/components/button";
+import { Menu, MenuItem, MenuItemLabel, MenuSeparator } from "@/components/ui/menu";
 import { View } from "react-native";
 import { ThemedText } from "./themed-text";
 import Lucide from "@react-native-vector-icons/lucide";
-import { cn } from "@/src/lib/utils";
+import { cn } from "@/lib/utils";
 
 type SettingItems =  {
       label: "TONE";

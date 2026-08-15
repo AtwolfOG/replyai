@@ -1,8 +1,8 @@
 import { Stack } from "expo-router";
-import { GluestackUIProvider } from '@/src/components/ui/gluestack-ui-provider';
-import '@/src/global.css';
+import { GluestackUIProvider } from '@/components/ui/gluestack-ui-provider';
+import '@/global.css';
 import { View } from "react-native";
-import AppTabs from "@/src/components/app-tabs";
+import AppTabs from "@/components/app-tabs";
 import Lucide from "@react-native-vector-icons/lucide";
 
 // @ts-ignore

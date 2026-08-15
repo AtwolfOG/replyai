@@ -1,7 +1,7 @@
 import { Text, View } from "react-native";
-import Container from "@/src/components/container";
-import { Menu, MenuItem, MenuItemLabel, MenuSeparator } from "@/src/components/ui/menu";
-import { Button } from "@/src/components/button";
+import Container from "@/components/container";
+import { Menu, MenuItem, MenuItemLabel, MenuSeparator } from "@/components/ui/menu";
+import { Button } from "@/components/button";
 import { useState } from "react";
 
 export default function History() {

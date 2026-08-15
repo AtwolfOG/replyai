@@ -1,7 +1,7 @@
 import { Modal, Text, TouchableOpacity, View } from "react-native";
 import { useState, createContext, useContext } from "react";
 import { ThemedText } from "./themed-text";
-import { cn } from "@/src/lib/utils";
+import { cn } from "@/lib/utils";
 
 type DropdownContextValue = {
   open: boolean;
