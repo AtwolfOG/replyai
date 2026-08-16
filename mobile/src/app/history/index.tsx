@@ -9,6 +9,7 @@ import { AccentButton } from "@/components/accent-button";
 import { ThemedText } from "@/components/themed-text";
 import Lucide from "@react-native-vector-icons/lucide";
 import { Copy } from "@/components/clipboard";
+import { useRouter } from "expo-router";
 
 const data: Reply[] = [
     {
@@ -33,7 +34,7 @@ export default function History() {
     return (  
         <Container>
         
-        <TextInput placeholder="Search" className="border border-border rounded p-2" />
+        <TextInput placeholder="Search" className="border-b border-border rounded p-2" />
         
         <Settings settingsState={settingsState} dispatch={dispatch} />
         {data.map((item) => (
@@ -44,6 +45,7 @@ export default function History() {
 }
 
 function HistoryItem({item}: {item: Reply}) {
+    const router = useRouter();
     return (
         <View className="border border-border rounded p-4">
             <View className="flex-row items-center justify-between">
@@ -57,7 +59,7 @@ function HistoryItem({item}: {item: Reply}) {
             <ThemedText className="mt-2 mb-4" type="small">{item.generated_reply}</ThemedText>
             <View className="border-t border-border"/>
             <View className="flex-row items-center gap-2 mt-2">
-                <CButton className="flex-row flex-6/8 items-center gap-2 bg-primary">
+                <CButton className="flex-row flex-6/8 items-center gap-2 bg-primary" onPress={() => router.push(`/history/${item.id}`)}>
                     <ThemedText type="small" className="text-primary-foreground">View Reply</ThemedText>
                     <Lucide name="square-arrow-out-up-right" size={20} color="white" />
                 </CButton>

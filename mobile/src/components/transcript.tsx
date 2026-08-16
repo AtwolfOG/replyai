@@ -7,7 +7,7 @@ import { Copy } from "./clipboard";
 import { Button } from "./button";
 import { KeyboardAvoidingView } from "react-native";
 
-export function Transcript({editable, transcript, dispatch}: {editable: boolean, transcript: string, dispatch: ActionDispatch<[action: ReplyStateAction]>}) {
+export function Transcript({editable, transcript, dispatch}: {editable: boolean, transcript: string, dispatch?: ActionDispatch<[action: ReplyStateAction]>}) {
     return (
         <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={100}>
           <View className="border-border">
