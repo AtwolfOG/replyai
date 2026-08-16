@@ -6,6 +6,7 @@ import { Settings } from "@/components/settings";
 import { useReducer } from "react";
 import { ReplyState, ReplyStateAction } from "@/types";
 import { Switch } from "@/components/ui/switch";
+import { Button } from "@/components/button";
 
 export default function History() {
     const [settingsState, dispatch] = useReducer(reducer, {
@@ -53,6 +54,12 @@ export default function History() {
                     </View>
                 </View>
                 <Switch isDisabled={true} isSelected={false} />
+            </View>
+
+            <View className="mt-4">
+                <Button variant="destructive">
+                    Logout
+                </Button>
             </View>
             
         </View>
