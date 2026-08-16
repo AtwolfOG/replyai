@@ -32,7 +32,7 @@ function CustomTabBar({ state, descriptors, navigation }: BottomTabBarProps) {
       className="absolute bottom-0 left-0 right-0 flex-row justify-around items-center"
       style={{ paddingBottom: insets.bottom }}
     >
-      <View className="flex-row w-[90%] justify-around items-center overflow-hidden border border-border rounded-full">
+      <View className="flex-row w-[90%] justify-around items-center overflow-hidden border border-border dark:border-border-dark rounded-full">
         <BlurView intensity={10} tint="systemMaterialLight" className="flex-1 flex-row bg-white/10">
           <View className="flex-1 flex-row justify-around items-center py-1">
             {state.routes.map((route, index) => {
@@ -70,8 +70,8 @@ function CustomTabBar({ state, descriptors, navigation }: BottomTabBarProps) {
                   onLongPress={onLongPress}
                 >
                   <View className="items-center gap-2">
-                    <Lucide name={tabs[index].icon} size={24} className={isFocused ? "text-primary!" : "text-muted!"} />
-                    <ThemedText type="small" className={isFocused ? "text-primary!" : "text-muted!"}>{label}</ThemedText>
+                    <Lucide name={tabs[index].icon} size={24} className={isFocused ? "text-primary! dark:text-primary!" : "text-muted! dark:text-muted-dark!"} />
+                    <ThemedText type="small" className={isFocused ? "text-primary! dark:text-primary!" : "text-muted! dark:text-muted-dark!"}>{label}</ThemedText>
                   </View>
                 </Pressable>
               )

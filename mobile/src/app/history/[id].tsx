@@ -41,7 +41,7 @@ export default function HistoryId() {
           <View className="flex-row items-center gap-2 my-2">
             <Copy text="Hello, how are you?" />
             <CButton className="flex-row items-center gap-2">
-              <Lucide name="trash-2" size={20} className="text-destructive!"/>
+              <Lucide name="trash-2" size={20} className="text-destructive! dark:text-destructive-dark!"/>
               <ThemedText type="default">Delete</ThemedText>
             </CButton>
           </View>
@@ -54,15 +54,15 @@ export default function HistoryId() {
               <Reply reply="Hello, how are you?" />
             </View>
 
-            <View className="my-4 border border-border rounded-lg p-4">
+            <View className="my-4 border border-border dark:border-border-dark rounded-lg p-4">
               <View className="flex-row items-center gap-2">
-                <Lucide name="settings" size={24} className="text-primary" />
+                <Lucide name="settings" size={24} className="text-primary dark:text-primary" />
                 <ThemedText type="subtitle">Settings</ThemedText>
               </View>
               <Settings defaultSetting={false} settingsState={state} dispatch={dispatch} />
-              <View className="flex-row items-center justify-between border border-border p-3 rounded-lg bg-surface-muted opacity-80">
+              <View className="flex-row items-center justify-between border border-border dark:border-border-dark p-3 rounded-lg bg-surface-muted dark:bg-surface-muted-dark opacity-80">
                 <View className="flex-row items-center gap-2">
-                    <Lucide name="shield-check" size={32} className="text-muted!" />
+                    <Lucide name="shield-check" size={32} className="text-muted! dark:text-muted-dark!" />
                     <View>
                         <ThemedText type="default">Fact Check</ThemedText>
                         <ThemedText type="small">Fact check your replies</ThemedText>

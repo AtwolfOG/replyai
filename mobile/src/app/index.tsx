@@ -24,9 +24,9 @@ export default function Home() {
             <View className="gap-8">
             
                 {/* Recording Container */}
-                <View className="items-center px-3 pt-12 pb-3 bg-surface rounded-lg">
-                    <View className="w-18 h-18 rounded-full bg-primary justify-center items-center">
-                        <Lucide name="mic" size={32} className="text-primary-foreground!" />
+                <View className="items-center px-3 pt-12 pb-3 bg-surface dark:bg-surface-dark rounded-lg">
+                    <View className="w-18 h-18 rounded-full bg-primary dark:bg-primary justify-center items-center">
+                        <Lucide name="mic" size={32} className="text-primary-foreground! dark:text-primary-foreground!" />
                     </View>
                     <View className="gap-px items-center my-3">
                         <ThemedText type="subtitle">00:00</ThemedText>
@@ -40,16 +40,16 @@ export default function Home() {
             <Transcript editable={true} transcript={state.transcript} dispatch={dispatch} />
 
             {/* Settings  */}
-            <View className="bg-surface gap-1 px-4 py-8 rounded-lg">
+            <View className="bg-surface dark:bg-surface-dark gap-1 px-4 py-8 rounded-lg">
                 <View className="flex-row items-center gap-2">
-                    <Lucide name="settings" size={24} className="text-primary" />
+                    <Lucide name="settings" size={24} className="text-primary dark:text-primary" />
                     <ThemedText type="subtitle">Settings</ThemedText>
                 </View>
             <Settings settingsState={state} dispatch={dispatch} defaultSetting={false} />
 
-            <View className="flex-row items-center justify-between border border-border p-3 rounded-lg bg-surface-muted opacity-80">
+            <View className="flex-row items-center justify-between border border-border dark:border-border-dark p-3 rounded-lg bg-surface-muted dark:bg-surface-muted-dark opacity-80">
                 <View className="flex-row items-center gap-2">
-                    <Lucide name="shield-check" size={32} className="text-muted!" />
+                    <Lucide name="shield-check" size={32} className="text-muted! dark:text-muted-dark!" />
                     <View>
                         <ThemedText type="default">Fact Check</ThemedText>
                         <ThemedText type="small">Fact check your replies</ThemedText>
@@ -59,9 +59,9 @@ export default function Home() {
             </View>
 
             <View className="mt-4">
-                <CButton className="bg-primary">
+                <CButton className="bg-primary dark:bg-primary">
                     <View className="flex-row items-center gap-2">
-                        <ThemedText className="text-primary-foreground!" type="default">Generate Reply</ThemedText><Lucide name="sparkles" size={24} className="text-primary-foreground!" />
+                        <ThemedText className="text-primary-foreground! dark:text-primary-foreground!" type="default">Generate Reply</ThemedText><Lucide name="sparkles" size={24} className="text-primary-foreground! dark:text-primary-foreground!" />
                     </View>
                 </CButton>
             </View>

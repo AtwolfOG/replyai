@@ -11,11 +11,11 @@ import Animated, { FadeOut, ZoomIn } from 'react-native-reanimated';
 const AnimatedView = Animated.createAnimatedComponent(ScrollView);
 
 const menuStyle = tva({
-  base: 'rounded-md bg-popover text-popover-foreground border border-border p-1 shadow-hard-5 max-h-[300px] overflow-y-auto',
+  base: 'rounded-md bg-popover dark:bg-popover-dark text-popover-foreground dark:text-popover-foreground-dark border border-border dark:border-border-dark p-1 shadow-hard-5 max-h-[300px] overflow-y-auto',
 });
 
 const menuItemStyle = tva({
-  base: 'min-w-[200px] p-3 flex-row items-center rounded data-[hover=true]:bg-accent data-[hover=true]:text-accent-foreground data-[active=true]:bg-accent data-[active=true]:text-accent-foreground data-[focus=true]:bg-accent data-[focus=true]:text-accent-foreground data-[focus=true]:web:outline-none data-[focus=true]:web:outline-0 data-[disabled=true]:opacity-40 data-[disabled=true]:web:cursor-not-allowed data-[focus-visible=true]:web:outline-2 data-[focus-visible=true]:web:outline-ring data-[focus-visible=true]:web:outline data-[focus-visible=true]:web:cursor-pointer data-[disabled=true]:data-[focus=true]:bg-transparent',
+  base: 'min-w-[200px] p-3 flex-row items-center rounded data-[hover=true]:bg-accent dark:data-[hover=true]:bg-accent-dark data-[hover=true]:text-accent-foreground dark:data-[hover=true]:text-accent-foreground-dark data-[active=true]:bg-accent dark:data-[active=true]:bg-accent-dark data-[active=true]:text-accent-foreground dark:data-[active=true]:text-accent-foreground-dark data-[focus=true]:bg-accent dark:data-[focus=true]:bg-accent-dark data-[focus=true]:text-accent-foreground dark:data-[focus=true]:text-accent-foreground-dark data-[focus=true]:web:outline-none data-[focus=true]:web:outline-0 data-[disabled=true]:opacity-40 data-[disabled=true]:web:cursor-not-allowed data-[focus-visible=true]:web:outline-2 data-[focus-visible=true]:web:outline-ring dark:data-[focus-visible=true]:web:outline-ring-dark data-[focus-visible=true]:web:outline data-[focus-visible=true]:web:cursor-pointer data-[disabled=true]:data-[focus=true]:bg-transparent',
 });
 
 const menuBackdropStyle = tva({
@@ -23,11 +23,11 @@ const menuBackdropStyle = tva({
 });
 
 const menuSeparatorStyle = tva({
-  base: 'bg-border h-px w-full',
+  base: 'bg-border dark:bg-border-dark h-px w-full',
 });
 
 const menuItemLabelStyle = tva({
-  base: 'text-popover-foreground font-normal font-body',
+  base: 'text-popover-foreground dark:text-popover-foreground-dark font-normal font-body',
 
   variants: {
     isTruncated: {

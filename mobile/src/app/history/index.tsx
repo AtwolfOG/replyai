@@ -34,7 +34,7 @@ export default function History() {
     return (  
         <Container>
         
-        <TextInput placeholder="Search" className="border-b border-border rounded p-2" />
+        <TextInput placeholder="Search" className="border-b border-border dark:border-border-dark rounded p-2" />
         
         <Settings settingsState={settingsState} dispatch={dispatch} />
         {data.map((item) => (
@@ -47,7 +47,7 @@ export default function History() {
 function HistoryItem({item}: {item: Reply}) {
     const router = useRouter();
     return (
-        <View className="border border-border rounded p-4">
+        <View className="border border-border dark:border-border-dark rounded p-4">
             <View className="flex-row items-center justify-between">
                 <ThemedText type="small">{item.created_at}</ThemedText>
             </View>
@@ -57,14 +57,14 @@ function HistoryItem({item}: {item: Reply}) {
                 <AccentButton text={item.audience} />
             </View>
             <ThemedText className="mt-2 mb-4" type="small">{item.generated_reply}</ThemedText>
-            <View className="border-t border-border"/>
+            <View className="border-t border-border dark:border-border-dark"/>
             <View className="flex-row items-center gap-2 mt-2">
-                <CButton className="flex-row flex-6/8 items-center gap-2 bg-primary" onPress={() => router.push(`/history/${item.id}`)}>
-                    <ThemedText type="small" className="text-primary-foreground">View Reply</ThemedText>
+                <CButton className="flex-row flex-6/8 items-center gap-2 bg-primary dark:bg-primary" onPress={() => router.push(`/history/${item.id}`)}>
+                    <ThemedText type="small" className="text-primary-foreground dark:text-primary-foreground">View Reply</ThemedText>
                     <Lucide name="square-arrow-out-up-right" size={20} color="white" />
                 </CButton>
                 <Copy text={item.generated_reply} icon />
-                <CButton className="items-center gap-2 bg-destructive" onPress={() => {}}>
+                <CButton className="items-center gap-2 bg-destructive dark:bg-destructive-dark" onPress={() => {}}>
                     <Lucide name="trash-2" size={20} color="white" />
                 </CButton>
             </View>

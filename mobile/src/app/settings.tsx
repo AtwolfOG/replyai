@@ -18,7 +18,7 @@ export default function History() {
         <Container>
         <View className="pt-20">
             <View className="items-center gap-2">
-                <View className="border border-border rounded-full overflow-hidden">
+                <View className="border border-border dark:border-border-dark rounded-full overflow-hidden">
                     <Image source={require("../../assets/images/icon.png")} className="w-20 h-20" />
                 </View>
                 <ThemedText type="title">Ayokunle Adedapo</ThemedText>
@@ -27,16 +27,16 @@ export default function History() {
 
             <View className="mt-10 p-2">
                 <View className="flex-row items-center gap-2">
-                    <Lucide name="sliders-horizontal" size={20} className="text-primary!" />
+                    <Lucide name="sliders-horizontal" size={20} className="text-primary! dark:text-primary!" />
                     <ThemedText type="subtitle">Generation Defaults</ThemedText>
                 </View>
                 <Settings settingsState={settingsState} dispatch={dispatch} defaultSetting={true} />
             </View>
 
 
-            <View className="my-2 flex-row items-center justify-between border border-border p-3 rounded-lg bg-surface">
+            <View className="my-2 flex-row items-center justify-between border border-border dark:border-border-dark p-3 rounded-lg bg-surface dark:bg-surface-dark">
                 <View className="flex-row items-center gap-2">
-                    <Lucide name="copy" size={32} className="text-muted!" />
+                    <Lucide name="copy" size={32} className="text-muted! dark:text-muted-dark!" />
                     <View>
                         <ThemedText type="default">Auto copy</ThemedText>
                         <ThemedText type="small">Auto copy reply to clipboard</ThemedText>
@@ -45,9 +45,9 @@ export default function History() {
                 <Switch isSelected={false} />
             </View>
 
-            <View className="flex-row items-center justify-between border border-border p-3 rounded-lg bg-surface opacity-80">
+            <View className="flex-row items-center justify-between border border-border dark:border-border-dark p-3 rounded-lg bg-surface dark:bg-surface-dark opacity-80">
                 <View className="flex-row items-center gap-2">
-                    <Lucide name="shield-check" size={32} className="text-muted!" />
+                    <Lucide name="shield-check" size={32} className="text-muted! dark:text-muted-dark!" />
                     <View>
                         <ThemedText type="default">Fact Check</ThemedText>
                         <ThemedText type="small">Fact check your replies</ThemedText>

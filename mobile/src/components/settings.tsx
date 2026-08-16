@@ -94,12 +94,12 @@ function SettingItem({setting, onChange, value}: {setting: SettingItems, onChang
     trigger={(triggerProps, {open}) => <CButton {...triggerProps} className="px-4 py-2" >
       <View className="flex-row items-center justify-between w-full">
         <ThemedText type="small">{value}</ThemedText> 
-        <Lucide name="chevron-down" size={24} className={cn("text-muted! transition-transform duration-200", open && "rotate-180")} />
+        <Lucide name="chevron-down" size={24} className={cn("text-muted! dark:text-muted-dark! transition-transform duration-200", open && "rotate-180")} />
       </View>
     </CButton>}
     >
         {setting.options.map((option) => (
-    <MenuItem key={option} textValue={option} className={cn("px-4", value === option && "bg-accent opacity-100!")}>
+    <MenuItem key={option} textValue={option} className={cn("px-4", value === option && "bg-accent dark:bg-accent-dark opacity-100!")}>
             <MenuItemLabel size="default">{option}</MenuItemLabel>
         </MenuItem>
         ))}

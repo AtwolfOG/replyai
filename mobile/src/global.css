@@ -1,9 +1,86 @@
 @import "tailwindcss";
 @import "nativewind/theme";
 
-@theme {
-  /* ─── Colors ─────────────────────────────────────────────── */
 
+/* ──────────────────────────────────────────────────────────
+   Light theme
+   ────────────────────────────────────────────────────────── */
+
+:root {
+  /* Background / surfaces */
+  --background: #f1f5f9;
+  --foreground: #131b2e;
+
+  --surface: #ffffff;
+  --surface-muted: #f2f3ff;
+  --surface-accent: #eaedff;
+
+  /* Brand */
+  --primary: #004ac6;
+  --primary-hover: #2563eb;
+  --primary-foreground: #ffffff;
+
+  --secondary: #515f74;
+  --secondary-foreground: #ffffff;
+
+  /* Borders / states */
+  --border: #c3c6d7;
+  --muted: #434655;
+
+  --error: #ba1a1a;
+
+  /* Text */
+  --text-heading: #131b2e;
+  --text-body: #131b2e;
+  --text-muted: #434655;
+  --text-link: #004ac6;
+  --text-link-hover: #2563eb;
+  --text-error: #ba1a1a;
+}
+
+/* ──────────────────────────────────────────────────────────
+   Dark theme
+   ────────────────────────────────────────────────────────── */
+.dark {
+  /* Background / surfaces */
+  --background-dark: #131b2e;
+  --foreground-dark: #f1f5f9;
+
+  --surface-dark: #1e293b;
+  --surface-muted-dark: #252b45;
+  --surface-accent-dark: #2d3558;
+
+  /* Brand */
+  --primary: #004ac6;
+  --primary-hover: #2563eb;
+  --primary-foreground: #ffffff;
+
+  --secondary-dark: #515f74;
+  --secondary-foreground-dark: #ffffff;
+
+  /* Borders / states */
+  --border-dark: #434655;
+  --muted-dark: #434655;
+
+  --error-dark: #ba1a1a;
+
+  /* Text */
+  --text-heading-dark: #f1f5f9;
+  --text-body-dark: #f1f5f9;
+  --text-muted-dark: #c3c6d7;
+
+  /* Links intentionally remain the same as light theme */
+  --text-link-dark: #004ac6;
+  --text-link-hover-dark: #2563eb;
+  --text-error-dark: #ba1a1a;
+}
+
+/* ──────────────────────────────────────────────────────────
+   Tailwind / NativeWind theme
+   ────────────────────────────────────────────────────────── */
+
+@theme {
+  /* Colors */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
@@ -22,7 +99,7 @@
   --color-muted: var(--muted);
 
   --color-error: var(--error);
-  --color-destructive: var(--destructive);
+  --color-destructive: var(--error);
 
   /* Text */
   --color-text-heading: var(--text-heading);
@@ -32,23 +109,34 @@
   --color-text-link-hover: var(--text-link-hover);
   --color-text-error: var(--text-error);
 
-  /* ─── Typography ────────────────────────────────────────── */
+  /* Gluestack / semantic colors */
+  --color-card: var(--surface);
+  --color-card-foreground: var(--foreground);
 
+  --color-popover: var(--surface);
+  --color-popover-foreground: var(--foreground);
+
+  --color-muted-foreground: var(--text-muted);
+
+  --color-accent: var(--surface-accent);
+  --color-accent-foreground: var(--foreground);
+
+  --color-input: var(--border);
+  --color-ring: var(--primary);
+
+  /* Typography */
   --font-sans: "Inter", sans-serif;
 
-  /* ─── Radius ────────────────────────────────────────────── */
-
+  /* Radius */
   --radius: 0.75rem;
   --radius-lg: 1rem;
   --radius-full: 9999px;
 
-  /* ─── Layout ────────────────────────────────────────────── */
-
+  /* Layout */
   --container: 1280px;
   --gutter: 1.5rem;
 
-  /* ─── Spacing ───────────────────────────────────────────── */
-
+  /* Spacing */
   --spacing-1: 0.25rem;
   --spacing-2: 0.5rem;
   --spacing-4: 1rem;
@@ -57,112 +145,46 @@
   --spacing-12: 3rem;
   --spacing-16: 4rem;
   --spacing-20: 5rem;
-}
 
-/* ─── Light theme ─────────────────────────────────────────── */
 
-:root {
-  --background: #f1f5f9;
-  --foreground: #131b2e;
+  /* dark variant */
+  --color-background-dark: var(--background-dark);
+  --color-foreground-dark: var(--foreground-dark);
 
-  --surface: #ffffff;
-  --surface-muted: #f2f3ff;
-  --surface-accent: #eaedff;
+  --color-surface-dark: var(--surface-dark);
+  --color-surface-muted-dark: var(--surface-muted-dark);
+  --color-surface-accent-dark: var(--surface-accent-dark);
 
-  --primary: #004ac6;
-  --primary-hover: #2563eb;
-  --primary-foreground: #ffffff;
 
-  --secondary: #515f74;
-  --secondary-foreground: #ffffff;
+  --color-secondary-dark: var(--secondary-dark);
+  --color-secondary-foreground-dark: var(--secondary-foreground-dark);
 
-  --border: #c3c6d7;
-  --muted: #434655;
+  --color-border-dark: var(--border-dark);
+  --color-muted-dark: var(--muted-dark);
 
-  --error: #ba1a1a;
-  --destructive: var(--error);
+  --color-error-dark: var(--error-dark);
+  --color-destructive-dark: var(--error-dark);
 
   /* Text */
-  --text-heading: #131b2e;
-  --text-body: #131b2e;
-  --text-muted: #434655;
-  --text-link: #004ac6;
-  --text-link-hover: #2563eb;
-  --text-error: #ba1a1a;
+  --color-text-heading-dark: var(--text-heading-dark);
+  --color-text-body-dark: var(--text-body-dark);
+  --color-text-muted-dark: var(--text-muted-dark);
+  --color-text-link-dark: var(--text-link-dark);
+  --color-text-link-hover-dark: var(--text-link-hover-dark);
+  --color-text-error-dark: var(--text-error-dark);
 
+  /* Gluestack / semantic colors */
+  --color-card-dark: var(--surface-dark);
+  --color-card-foreground-dark: var(--foreground-dark);
 
+  --color-popover-dark: var(--surface-dark);
+  --color-popover-foreground-dark: var(--foreground-dark);
 
-  /* Gluestack / semantic aliases */
-  --color-card: #ffffff;
-  --color-card-foreground: #131b2e;
+  --color-muted-foreground-dark: var(--text-muted-dark);
 
-  --color-popover: #ffffff;
-  --color-popover-foreground: #131b2e;
+  --color-accent-dark: var(--surface-accent-dark);
+  --color-accent-foreground-dark: var(--foreground-dark);
 
-  --color-muted-foreground: #434655;
-
-  --color-accent: #eaedff;
-  --color-accent-foreground: #131b2e;
-
-  --color-input: #c3c6d7;
-  --color-ring: #004ac6;
-}
-
-/* ─── Dark theme ──────────────────────────────────────────── */
-
-.dark {
-  /*
-   * Only semantic foreground/background/text/border values change.
-   *
-   * Everything else intentionally stays identical.
-   */
-
-  --background: #131b2e;
-  --foreground: #f1f5f9;
-
-  --border: #434655;
-
-  --text-heading: #f1f5f9;
-  --text-body: #f1f5f9;
-  --text-muted: #c3c6d7;
-
-  /*
-   * Link colors remain unchanged because they are neither
-   * background/foreground nor black/white.
-   */
-}
-
-@theme {
-  --color-card: var(--surface);
-  --color-card-foreground: var(--foreground);
-
-  --color-popover: var(--surface);
-  --color-popover-foreground: var(--foreground);
-
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--text-muted);
-
-  --color-accent: var(--surface-accent);
-  --color-accent-foreground: var(--foreground);
-
-  --color-input: var(--border);
-  --color-ring: var(--primary);
-
-  --color-destructive: var(--destructive);
-
-
-
-    --color-card: var(--surface);
-  --color-card-foreground: var(--foreground);
-
-  --color-popover: var(--surface);
-  --color-popover-foreground: var(--foreground);
-
-  --color-muted-foreground: var(--text-muted);
-
-  --color-accent: var(--surface-accent);
-  --color-accent-foreground: var(--foreground);
-
-  --color-input: var(--border);
-  --color-ring: var(--primary);
+  --color-input-dark: var(--border-dark);
+  --color-ring-dark: var(--primary-dark);
 }

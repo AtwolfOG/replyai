@@ -4,6 +4,7 @@ import '@/global.css';
 import { View } from "react-native";
 import AppTabs from "@/components/app-tabs";
 import Lucide from "@react-native-vector-icons/lucide";
+import { useColorScheme } from "react-native";
 
 // @ts-ignore
 // import { cssInterop } from "nativewind";
@@ -18,12 +19,14 @@ import Lucide from "@react-native-vector-icons/lucide";
 // });
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
+  const colorScheme = useColorScheme();
+console.log(colorScheme);
   return (
-    <GluestackUIProvider mode="light">
+    <GluestackUIProvider mode={colorScheme}>
       <View className="flex-1">
         {children}
         <AppTabs />
       </View>
     </GluestackUIProvider>
   );
-}
+} 
