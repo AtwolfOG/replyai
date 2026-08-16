@@ -21,7 +21,7 @@ export function Transcript({editable, transcript, dispatch}: {editable: boolean,
                 </Button>}
             </View>
             <View className="p-3 border border-border dark:border-border-dark bg-surface dark:bg-surface-dark rounded-b-lg">
-                <TextInput style={{ textAlignVertical: 'top' }} className="min-h-50 p-3 bg-surface-muted dark:bg-surface-muted-dark border border-border dark:border-border-dark rounded" multiline value={transcript} onChangeText={(text) => dispatch({ type: "SET_TRANSCRIPT", payload: text })}/>
+                <TextInput style={{ textAlignVertical: 'top' }} className="min-h-50 p-3 text-text-body dark:text-text-body-dark bg-surface-muted dark:bg-surface-muted-dark border border-border dark:border-border-dark rounded" multiline value={transcript} onChangeText={(text) => dispatch({ type: "SET_TRANSCRIPT", payload: text })}/>
             </View>
           </View>
         </KeyboardAvoidingView>

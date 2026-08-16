@@ -12,7 +12,7 @@ export type ThemedTextProps = TextProps & {
 
 const typeClasses: ClassValue[] = {
   default: "text-[16px] text-text-body dark:text-text-body-dark leading-[24px] font-medium",
-  title: "text-[32px] text-text-title dark:text-text-title-dark leading-[52px] font-semibold",
+  title: "text-[32px] text-text-heading dark:text-text-heading-dark leading-[52px] font-semibold",
   small: "text-[14px] text-text-muted dark:text-text-muted-dark leading-[20px] font-medium",
   smallBold: "text-[14px] text-text-body dark:text-text-body-dark leading-[20px] font-bold",
   subtitle: "text-[28px] text-text-body dark:text-text-body-dark leading-[44px] font-semibold",

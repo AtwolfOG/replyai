@@ -42,7 +42,7 @@ export default function Home() {
             {/* Settings  */}
             <View className="bg-surface dark:bg-surface-dark gap-1 px-4 py-8 rounded-lg">
                 <View className="flex-row items-center gap-2">
-                    <Lucide name="settings" size={24} className="text-primary dark:text-primary" />
+                    <Lucide name="settings" size={24} className="text-primary! dark:text-primary!" />
                     <ThemedText type="subtitle">Settings</ThemedText>
                 </View>
             <Settings settingsState={state} dispatch={dispatch} defaultSetting={false} />

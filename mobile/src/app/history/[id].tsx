@@ -25,7 +25,7 @@ export default function HistoryId() {
     return (
         <Container>
           <Pressable onPress={() => router.back()} className="flex-row items-center gap-2">
-            <Lucide name="arrow-left" size={20} />
+            <Lucide className="text-text-body! dark:text-text-body-dark!" name="arrow-left" size={20} />
             <ThemedText type="default">Back</ThemedText>
           </Pressable>
 
@@ -56,7 +56,7 @@ export default function HistoryId() {
 
             <View className="my-4 border border-border dark:border-border-dark rounded-lg p-4">
               <View className="flex-row items-center gap-2">
-                <Lucide name="settings" size={24} className="text-primary dark:text-primary" />
+                <Lucide name="settings" size={24} className="text-primary! dark:text-primary!" />
                 <ThemedText type="subtitle">Settings</ThemedText>
               </View>
               <Settings defaultSetting={false} settingsState={state} dispatch={dispatch} />

@@ -14,14 +14,14 @@ export function Copy({text, icon}: {text: string, icon?: boolean}) {
   if (copied) {
     return (
         <View className="p-3">
-          <Lucide name="check" size={24} className="text-primary dark:text-primary" />
+          <Lucide name="check" size={24} className="text-text-body! dark:text-text-body-dark!" />
         </View>
     )
   }
     return (
          icon ? 
          <TouchableOpacity className="p-3" onPress={() => copyToClipboard(text)}>
-           <Lucide name="copy" size={24} className="text-primary dark:text-primary" /> 
+           <Lucide name="copy" size={24} className="text-text-body! dark:text-text-body-dark!" /> 
          </TouchableOpacity>
          :  <Button onPress={() => copyToClipboard(text)}>
           Copy
