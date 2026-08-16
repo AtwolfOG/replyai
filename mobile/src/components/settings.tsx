@@ -62,7 +62,7 @@ function SettingItem({setting, onChange, value}: {setting: SettingItems, onChang
   return (
     <Menu 
     placement="bottom" 
-    offset={15}
+    offset={10}
     selectedKeys={[value]}
     disabledKeys={[value]}
     selectionMode="single"
@@ -91,9 +91,9 @@ function SettingItem({setting, onChange, value}: {setting: SettingItems, onChang
   }
     }}
     closeOnSelect={true}
-    trigger={(triggerProps, {open}) => <CButton {...triggerProps} className="px-4" >
+    trigger={(triggerProps, {open}) => <CButton {...triggerProps} className="px-4 py-2" >
       <View className="flex-row items-center justify-between w-full">
-        <ThemedText type="default">{value}</ThemedText> 
+        <ThemedText type="small">{value}</ThemedText> 
         <Lucide name="chevron-down" size={24} className={cn("text-muted! transition-transform duration-200", open && "rotate-180")} />
       </View>
     </CButton>}
